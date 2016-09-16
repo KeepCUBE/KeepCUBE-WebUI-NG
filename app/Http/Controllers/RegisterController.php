@@ -4,8 +4,7 @@ namespace KC\Http\Controllers;
 
 use KC\User;
 use Validator;
-use KC\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RedirectsUsers;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -21,7 +20,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
 
     /**
      * Create a new controller instance.
@@ -41,18 +39,19 @@ class RegisterController extends Controller
      */
     public function register(Request $request, Response $response)
     {
-        $data = $request->only(['email', 'password','username']);
+        $data = $request->only(['email', 'password', 'username']);
 
         $validation = $this->validator($request->all());
 
-        if($validation->fails()) {
-          return $validation->errors();
+        if ($validation->fails()) {
+            return $validation->errors();
         }
 
         $this->create($data);
 
         return $data;
     }
+
     /**
      * Get a validator for an incoming registration request.
      *
