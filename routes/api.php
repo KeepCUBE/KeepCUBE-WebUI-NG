@@ -20,6 +20,6 @@ use Illuminate\Http\Request;
 Route::post('/auth', 'AuthController@authenticate');
 Route::post('/register', 'RegisterController@register');
 
-Route::group(['middleware' => 'jwt.auth'], function() {
-  Route::get('/hello', 'HomeController@index');
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('/hello', 'HomeController@index');
 });

@@ -50,6 +50,7 @@ class RegisterController extends Controller
     public function register(Request $request, Response $response)
     {
         $data = $request->json();
+
         return $data;
         /*$this->validator($request->all())->validate();
 
@@ -57,6 +58,7 @@ class RegisterController extends Controller
 
         return redirect($this->redirectPath());*/
     }
+
     /**
      * Get a validator for an incoming registration request.
      *
