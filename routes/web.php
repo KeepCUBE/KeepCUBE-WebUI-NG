@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/{catchall?}', function () {
+    return response()->view('welcome');
+})->where('catchall', '(.*)');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 

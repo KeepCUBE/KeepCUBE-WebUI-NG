@@ -13,8 +13,27 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
-const app = new Vue({
-    el: 'body'
+import accesories from './components/pages/Accessories.vue'
+import main from './components/pages/Main.vue'
+import rooms from './components/pages/Rooms.vue'
+import users from './components/pages/Users.vue'
+
+const routes = [
+    { path: '/home',        name: 'dashboard',  component: main },
+    { path: '/accessories', name: 'accessories',component: accesories },
+    { path: '/rooms',       name: 'rooms',      component: rooms },
+    { path: '/users',       name: 'users',      component: users },
+];
+
+const router = new VueRouter({
+    routes
 });
+
+Vue.component('App', require('./components/App.vue'));
+
+new Vue({
+    router,
+}).$mount('#app');

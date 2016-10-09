@@ -19,6 +19,7 @@ require('bootstrap-sass');
 window.Vue = require('vue');
 require('vue-resource');
 
+
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
  * the outgoing requests issued by this application. The CSRF middleware
@@ -36,6 +37,8 @@ Vue.http.interceptors.push((request, next) => {
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
+require('./vendor/material.min');
 
 // import Echo from "laravel-echo"
 
