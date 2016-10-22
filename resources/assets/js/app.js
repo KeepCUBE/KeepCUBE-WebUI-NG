@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 
+require('./vendor/material.min');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
@@ -29,11 +31,17 @@ const routes = [
 ];
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 });
 
 Vue.component('App', require('./components/App.vue'));
 
+Vue.config.devtools = true;
+Vue.config.silent = false;
 new Vue({
     router,
-}).$mount('#app');
+    el: '#app',
+    filters: {
+    }
+});

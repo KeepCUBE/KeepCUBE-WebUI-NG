@@ -96,10 +96,7 @@
     top: 0;
     left: 0;
 
-    @include shadow-2dp();
-
     box-sizing: border-box;
-    border-right: 1px solid $layout-drawer-border-color;
     background: $layout-drawer-bg-color;
 
     // Transform offscreen.

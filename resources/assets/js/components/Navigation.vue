@@ -33,9 +33,7 @@
                 "links": links,
             }
         },
-        ready() {
-            console.log("Menu loaded");
-        }
+
     }
 </script>
 

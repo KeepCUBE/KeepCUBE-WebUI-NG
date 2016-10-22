@@ -7,8 +7,8 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = require('jquery');
-require('bootstrap-sass');
+//window.$ = window.jQuery = require('jquery');
+//require('bootstrap-sass');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -38,7 +38,7 @@ Vue.http.interceptors.push((request, next) => {
  * allows your team to easily build robust real-time web applications.
  */
 
-require('./vendor/material.min');
+//require('./vendor/material.min');
 
 // import Echo from "laravel-echo"
 

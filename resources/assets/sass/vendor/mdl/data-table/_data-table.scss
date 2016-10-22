@@ -19,7 +19,6 @@
 
 .mdl-data-table {
   position: relative;
-  border: $data-table-dividers;
   border-collapse: collapse;
   white-space: nowrap;
   font-size: $data-table-font-size;
@@ -39,6 +38,8 @@
       height: $data-table-row-height;
       @include material-animation-default(0.28s);
       transition-property: background-color;
+
+      border-top: $data-table-dividers;
 
       &.is-selected {
         background-color: $data-table-selection-color;
@@ -67,8 +68,6 @@
     position: relative;
     vertical-align: middle;
     height: $data-table-row-height;
-    border-top: $data-table-dividers;
-    border-bottom: $data-table-dividers;
     padding-top: $data-table-cell-top;
     box-sizing: border-box;
 
@@ -113,6 +112,9 @@
 
 .mdl-data-table__select {
   width: 16px;
+  position: absolute;
+  bottom: 8px;
+  left: 24px;
 }
 
 .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {

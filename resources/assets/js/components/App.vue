@@ -1,16 +1,16 @@
 <template>
-    <div>
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-            <div class="mdl-layout__drawer">
-                <div class="mdl-layout-logo"><img src="/imgs/layout/logo.svg"></div>
-                <navigation></navigation>
-            </div>
-            <main class="mdl-layout__content">
-                <div class="page-content">
-                    <router-view></router-view>
-                </div>
-            </main>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+        <div class="mdl-layout__drawer">
+            <div class="mdl-layout-logo"><img src="/imgs/layout/logo.svg"></div>
+            <navigation></navigation>
         </div>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <h1 class="mdl-typography--text-capitalize">{{ header }}</h1>
+                <h4>{{ motd }}</h4>
+                <router-view></router-view>
+            </div>
+        </main>
     </div>
 </template>
 
@@ -32,11 +32,19 @@
     export default{
         data(){
             return{
-                header: ''
+                motd: ''
             }
         },
         components:{
             navigation,
+        },
+        computed: {
+            header: function() {
+                return this.$route.name
+            }
+        },
+        mounted() {
+            this.motd = 'This project is jQuery free!!!'
         },
     }
 </script>

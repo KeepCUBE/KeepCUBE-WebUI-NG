@@ -4195,14 +4195,13 @@ input.mdl-button[type="submit"] {
   -webkit-box-direction: normal;
   flex-direction: column;
   font-size: 16px;
-  font-weight: 400;
-  min-height: 200px;
+  font-weight: 200;
+  min-height: 150px;
   overflow: hidden;
   width: 330px;
   z-index: 1;
   position: relative;
-  background: rgb(255,255,255);
-  border-radius: 2px;
+  background: rgb(82,182,236);
   box-sizing: border-box; }
 
 .mdl-card__media {
@@ -4217,7 +4216,7 @@ input.mdl-button[type="submit"] {
 .mdl-card__title {
   -webkit-box-align: center;
   align-items: center;
-  color: rgb(0,0,0);
+  color: rgb(255,255,255);
   display: block;
   display: -webkit-box;
   display: flex;
@@ -4240,7 +4239,7 @@ input.mdl-button[type="submit"] {
   display: -webkit-box;
   display: flex;
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 200;
   line-height: normal;
   overflow: hidden;
   -webkit-transform-origin: 149px 48px;
@@ -4253,7 +4252,7 @@ input.mdl-button[type="submit"] {
   margin: 0; }
 
 .mdl-card__supporting-text {
-  color: rgba(0,0,0, 0.54);
+  color: rgba(255,255,255, 0.54);
   font-size: 1rem;
   line-height: 18px;
   overflow: hidden;
@@ -5016,7 +5015,6 @@ input.mdl-button[type="submit"] {
 /* Dialog */
 .mdl-data-table {
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.12);
   border-collapse: collapse;
   white-space: nowrap;
   font-size: 13px;
@@ -5033,7 +5031,8 @@ input.mdl-button[type="submit"] {
     -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-transition-property: background-color;
-    transition-property: background-color; }
+    transition-property: background-color;
+    border-top: 2px solid rgba(82,182,236, 0.8); }
     .mdl-data-table tbody tr.is-selected {
       background-color: #e0e0e0; }
     .mdl-data-table tbody tr:hover {
@@ -5049,8 +5048,6 @@ input.mdl-button[type="submit"] {
     position: relative;
     vertical-align: middle;
     height: 48px;
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     padding-top: 12px;
     box-sizing: border-box; }
     .mdl-data-table td .mdl-data-table__select {
@@ -5095,7 +5092,10 @@ input.mdl-button[type="submit"] {
       content: "\e5db"; }
 
 .mdl-data-table__select {
-  width: 16px; }
+  width: 16px;
+  position: absolute;
+  bottom: 8px;
+  left: 24px; }
 
 .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {
   text-align: left; }
@@ -5319,7 +5319,7 @@ input.mdl-button[type="submit"] {
         text-align: right; }
   .mdl-dialog__content {
     padding: 20px 24px 24px 24px;
-    color: rgba(0,0,0, 0.54); }
+    color: rgba(255,255,255, 0.54); }
 
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
@@ -7393,9 +7393,7 @@ input.mdl-button[type="submit"] {
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
-  border-right: 1px solid rgb(224,224,224);
   background: rgb(59,182,239);
   -webkit-transform: translateX(-250px);
   transform: translateX(-250px);
@@ -11363,5 +11361,12 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
     .mdl-grid.mdl-grid--no-spacing > .mdl-cell--11-offset, .mdl-grid.mdl-grid--no-spacing >
     .mdl-cell--11-offset-desktop.mdl-cell--11-offset-desktop {
       margin-left: 91.6666666667%; } }
+
+#app {
+  display: -webkit-box;
+  display: flex;
+  position: fixed;
+  height: 100%;
+  width: 100%; }
 
 /*# sourceMappingURL=app.css.map */
