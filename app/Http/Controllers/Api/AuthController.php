@@ -1,11 +1,12 @@
 <?php
 
-namespace KC\Http\Controllers;
+namespace KC\Http\Controllers\Api;
 
+use Tymon\JWTAuth\Exceptions\JWTException;
+use KC\Http\Controllers\Api\Controller;
 use Illuminate\Http\Request;
 use KC\Http\Requests;
 use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
