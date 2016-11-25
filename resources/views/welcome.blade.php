@@ -10,10 +10,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
         <link>
-{{--
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link href="https://fonts.googleapis.com/css?family=Ek+Mukta:200,400" rel="stylesheet">
---}}
 
 
     </head>
