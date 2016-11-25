@@ -1,0 +1,13 @@
+{
+  "name": "keepcube-ui",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor/bower_dl",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vex": "HubSpot/vex#^3.0.0"
+  }
+}
