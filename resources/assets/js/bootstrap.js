@@ -7,8 +7,8 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = require('jquery');
-require('bootstrap-sass');
+//window.$ = window.jQuery = require('jquery');
+//require('bootstrap-sass');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -18,6 +18,7 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 require('vue-resource');
+
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -36,6 +37,8 @@ Vue.http.interceptors.push((request, next) => {
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
+//require('./vendor/material.min');
 
 // import Echo from "laravel-echo"
 
