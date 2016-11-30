@@ -73,6 +73,9 @@
 
   .mdl-icon-toggle.is-checked & {
     color: $icon-toggle-checked-color;
+    & path {
+      fill: $icon-toggle-checked-color;
+    }
   }
 
   .mdl-icon-toggle.is-disabled & {

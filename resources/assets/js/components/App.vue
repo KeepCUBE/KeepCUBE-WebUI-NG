@@ -18,12 +18,6 @@
     .page-content {
         padding: 1em 4em;
     }
-    .page-content > div {
-        display: flex;
-    }
-    img path {
-        fill: #ffffff;
-    }
 </style>
 
 <script>

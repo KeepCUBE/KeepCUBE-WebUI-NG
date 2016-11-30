@@ -18,5 +18,8 @@
     "vue-loader": "^9.5.0",
     "vue-resource": "^0.9.3",
     "vue-router": "^2.0.0-rc.7"
+  },
+  "dependencies": {
+    "vuex": "^2.0.0"
   }
 }
