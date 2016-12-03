@@ -13,7 +13,7 @@ class UserResourceTest extends TestCase
     ];
 
     public function testUserIndex() {
-        $users = factory(KC\User::class,4)->create();
+        $users = factory(KC\Models\User::class,4)->create();
         $response = $this->get(route('users.index'));
 
         $response->seeStatusCode(200);
@@ -25,7 +25,7 @@ class UserResourceTest extends TestCase
         }
     }
     public function testUserShow() {
-        $user = factory(KC\User::class)->create();
+        $user = factory(KC\Models\User::class)->create();
         $route = route('users.show', ['user' => $user->id]);
         $response = $this->get($route);
 
@@ -33,7 +33,7 @@ class UserResourceTest extends TestCase
         $response->seeJson(['success' => true, 'name' => $user->name]);
     }
     public function testUserShowNotFound() {
-        $user = factory(KC\User::class)->create();
+        $user = factory(KC\Models\User::class)->create();
         $route = route('users.show', ['user'=>$user->id+1]);
         $response = $this->get($route, $this->headers);
 
@@ -41,7 +41,7 @@ class UserResourceTest extends TestCase
         $response->seeJson(['success' => false]);
     }
     public function testUserUpdate() {
-        $user = factory(KC\User::class)->create();
+        $user = factory(KC\Models\User::class)->create();
         $route = route('users.update', [
           'user' => $user->id,
           'name' => 'testvalue'
@@ -53,7 +53,7 @@ class UserResourceTest extends TestCase
         $this->seeInDatabase('users', ['name' => 'testvalue']);
     }
     public function testUserUpdateNotFound() {
-        $user = factory(KC\User::class)->create();
+        $user = factory(KC\Models\User::class)->create();
         $route = route('users.update', [
           'user' => $user->id + 50,
           'name' => 'testvalue'
@@ -66,7 +66,7 @@ class UserResourceTest extends TestCase
     }
     public function testUserCreate() {
         $secret['password'] = $secret['password_confirmation'] = 'secret1234';
-        $user = factory(KC\User::class)->make();
+        $user = factory(KC\Models\User::class)->make();
         $route = route('users.store', array_merge($user->toArray(),$secret));
         $response = $this->post($route);
 
@@ -74,14 +74,14 @@ class UserResourceTest extends TestCase
         $response->seeJson(['success' => true]);
     }
     public function testUserDestroy() {
-        $user = factory(KC\User::class)->create();
+        $user = factory(KC\Models\User::class)->create();
         $response = $this->delete(route('users.destroy', ['user' => $user->id]));
 
         $response->seeStatusCode(200);
         $response->seeJson(['success' => true]);
     }
     public function testUserDestroyNotFound() {
-        $user = factory(KC\User::class)->create();
+        $user = factory(KC\Models\User::class)->create();
         $route = route('users.destroy', ['user' => $user->id + 1]);
         $response = $this->delete($route, [], $this->headers);
 

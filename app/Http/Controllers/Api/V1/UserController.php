@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use KC\Http\Requests;
 use KC\Http\Controllers\Api\Controller;
-use KC\User;
+use KC\Models\User;
 use Validator;
 use KC\Transformers\UserTransformer;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;

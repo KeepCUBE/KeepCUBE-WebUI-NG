@@ -2,7 +2,7 @@
 namespace KC\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use KC\User;
+use KC\Models\User;
 
 class UserTransformer extends TransformerAbstract {
     public function transform(User $user) {

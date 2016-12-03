@@ -2,7 +2,7 @@
 
 namespace KC\Http\Controllers\Api;
 
-use KC\User;
+use KC\Models\User;
 use Validator;
 use KC\Http\Controllers\Api\Controller;
 use Illuminate\Foundation\Auth\RedirectsUsers;
