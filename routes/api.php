@@ -18,8 +18,13 @@ use Illuminate\Http\Request;
 })->middleware('auth:api');*/
 
 Route::post('/auth', 'AuthController@authenticate');
-Route::post('/register', 'RegisterController@register');
+//Route::post('/register', 'RegisterController@register');
 
-Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('/hello', 'HomeController@index');
+Route::group([
+  'middleware' => 'jwt',
+  'namespace' => 'V1',
+  'prefix' => 'v1'
+], function() {
+  Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
+
 });
