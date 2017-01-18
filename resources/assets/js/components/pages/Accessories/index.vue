@@ -1,24 +1,8 @@
 <template>
     <div id="accessories">
+        <accessory-modal v-if="visible"></accessory-modal>
         <div class="operation-bar">
-            <button v-on:click="changeMode(0)" class="mdl-button mdl-js-button mdl-button--icon" id="layout-type">
-                <i class="material-icons">view_module</i>
-                <div class="mdl-tooltip mdl-tooltip--large" for="layout-type">
-                    Types
-                </div>
-            </button>
-            <button v-on:click="changeMode(1)" class="mdl-button mdl-js-button mdl-button--icon" id="layout-groups">
-                <i class="material-icons">view_quilt</i>
-                <div class="mdl-tooltip mdl-tooltip--large" for="layout-groups">
-                    Groups
-                </div>
-            </button>
-            <button v-on:click="changeMode(2)" class="mdl-button mdl-js-button mdl-button--icon" id="layout-list">
-                <i class="material-icons">view_list</i>
-                <div class="mdl-tooltip mdl-tooltip--large" for="layout-list">
-                    All
-                </div>
-            </button>
+            <mode-button v-for="(value, mode) in 3" v-on:click.native="changeMode(mode)" v-bind:mode="mode"></mode-button>
         </div>
         <div class="mdl-grid">
             <template v-if="mode == '0'">
@@ -38,7 +22,7 @@
             <template v-if="mode == '2'">
                 <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
                     <tbody>
-                    <tr v-for="accessory in accessories">
+                    <tr v-for="accessory in accessories" @click="openModal">
                         <td class="mdl-data-table__cell--non-numeric">{{ accessory.title }}</td>
                         <td>{{ findTypeById(accessory.typeId).title }}</td>
                         <td>
@@ -52,15 +36,13 @@
     </div>
 </template>
 
-<style>
-
-</style>
-
 <script>
-
+    import AccessoryModal from './AccessoryModal.vue';
+    import ModeButton from './ModeButton.vue';
     export default{
         data(){
             return{
+                visible: false,
                 mode: 2, //mode of view [0 = types, 1 = groups, 2 = all]
                 types: [
                     {
@@ -96,6 +78,7 @@
                         ],
                     },
                 ],
+/*
                 accessories: [
                     {
                         id: 34,
@@ -125,6 +108,7 @@
                         ]
                     },
                 ]
+*/
             }
         },
         methods: {
@@ -155,11 +139,29 @@
                 }
 
                 return filteredGroups;
+            },
+            openModal() {
+                this.visible = true;
+            },
+            closeModal() {
+                this.visible = false;
             }
         },
         components:{
+            ModeButton,
+            AccessoryModal
         },
-        mounted() {
+        created() {
+            this.$store.dispatch('getAccessoriesFromApi');
+            this.$bus.on('modal-close', this.closeModal);
+        },
+        destroyed() {
+            this.$bus.off('modal-close', this.closeModal);
+        },
+        computed: {
+            accessories() {
+                return this.$store.getters.allAccessories;
+            }
         }
     }
 </script>

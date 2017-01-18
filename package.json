@@ -20,6 +20,7 @@
     "vue-router": "^2.0.0-rc.7"
   },
   "dependencies": {
+    "vue-bus": "^0.3.0",
     "vuex": "^2.0.0"
   }
 }

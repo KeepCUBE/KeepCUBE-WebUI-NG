@@ -3,7 +3,9 @@
         <div class="modal-mask">
             <div class="modal-wrapper">
                 <div class="modal-container">
-                    {{ htmlContent }}
+                    <div class="closeBtn" @click="close"><i class="material-icons">clear</i></div>
+                    <slot>
+                    </slot>
                 </div>
             </div>
         </div>
@@ -28,24 +30,15 @@
     }
 
     .modal-container {
-        width: 300px;
+        width: 90%;
         margin: 0px auto;
-        padding: 20px 30px;
+        padding: 16px;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
         transition: all .3s ease;
         font-family: Helvetica, Arial, sans-serif;
     }
-
-    /*
-     * The following styles are auto-applied to elements with
-     * transition="modal" when their visibility is toggled
-     * by Vue.js.
-     *
-     * You can easily play with the modal transition by editing
-     * these styles.
-     */
 
     .modal-enter {
         opacity: 0;
@@ -60,10 +53,21 @@
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
+    .closeBtn {
+        cursor: pointer;
+    }
 </style>
 <script>
     export default {
-        props: ['htmlContent'],
-
+        methods: {
+            close() {
+                this.$bus.emit('modal-close');
+                console.log('closed');
+            },
+        },
+        created() {
+            this.$bus.emit('modal-open');
+            this.$bus.once('esc-press', this.close);
+        },
     }
 </script>

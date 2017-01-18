@@ -9,12 +9,13 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import accesories from './components/pages/Accessories.vue'
-import main from './components/pages/Main.vue'
-import rooms from './components/pages/Rooms.vue'
-import users from './components/pages/Users.vue'
+import accesories from './components/pages/Accessories/index.vue'
+import main from './components/pages/Dashboard/index.vue'
+import rooms from './components/pages/Rooms/index.vue'
+import users from './components/pages/Users/index.vue'
 
 const routes = [
+    {path: '/', name: 'dashboard', component: main},
     {path: '/home', name: 'dashboard', component: main},
     {path: '/accessories', name: 'accessories', component: accesories},
     {path: '/rooms', name: 'rooms', component: rooms},

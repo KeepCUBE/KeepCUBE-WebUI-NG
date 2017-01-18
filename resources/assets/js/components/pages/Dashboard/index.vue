@@ -7,27 +7,25 @@
             </label>
         </div>
 
-        <modal v-if="showModal" :html-content="modalContent"></modal>
-
         <div class="modals" id="modalHandler">
             <h1>Hello world</h1>
         </div>
 
         <div class="mdl-grid">
-            <div v-for="(homeCard, index) in homeCards"  v-mdl class="mdl-cell mdl-cell--4-col mdl-card">
+            <div v-for="(homeCard, index) in homeCards" class="mdl-cell mdl-cell--4-col mdl-card">
                 <div class="mdl-card__title">{{ homeCard.title }}</div>
                 <div class="mdl-card__title">{{ homeCard.time }}</div>
 
                 <div v-if="editMode" class="mdl-card__operation-column">
-                    <button v-on:click="removeHomeCard(index)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                    <button @click="removeHomeCard(index)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                         <i class="material-icons">clear</i>
                     </button>
-                    <button v-on:click="showModal = true" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                        <i class="material-icons">gesture</i>
+                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <i class="material-icons">settings</i>
                     </button>
                 </div>
             </div>
-            <div v-if="editMode" v-on:click="addHomeCard" v-mdl class="mdl-cell mdl-cell--4-col mdl-card mdl-card--add">
+            <div v-if="editMode" @click="addHomeCard" class="mdl-cell mdl-cell--4-col mdl-card mdl-card--add">
                 <i class="material-icons">add</i>
             </div>
         </div>
@@ -69,8 +67,6 @@
 
 <script>
 
-    import modal from '../cuties/Modal.vue';
-
     export default{
         data() {
             return {
@@ -80,7 +76,6 @@
                         title: "text",
                     }
                 ],
-                modalContent: "hello",
             }
         },
         methods: {
@@ -95,13 +90,7 @@
                 console.log(this.homeCards);
             }
         },
-        computed: {
-            modalContent: function () {
-                return "test";
-            }
-        },
         components:{
-            modal,
         }
     }
 </script>
