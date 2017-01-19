@@ -1,11 +1,11 @@
 <template>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
         <!--<div class="modal-wrapper"><div class="modal-container"><div class="closeBtn"><i class="material-icons">clear</i></div> </div></div>-->
-        <div class="mdl-layout__drawer"
-            :class="{pushback: modal}">
+        <div class="mdl-layout__drawer" :class="{pushback: modal}">
             <div class="mdl-layout-logo"><img src="/imgs/layout/logo.svg"></div>
             <navigation></navigation>
         </div>
+        <div aria-expanded="false" role="button" tabindex="0" :class="{pushback: modal}" class="mdl-layout__drawer-button"><i class="material-icons"></i></div>
         <main class="mdl-layout__content">
             <div class="page-content">
                 <h1 class="mdl-typography--text-capitalize">{{ header }}</h1>
