@@ -75,7 +75,7 @@ class Handler extends ExceptionHandler
      */
     private function responseJson($message, $code = 500) {
         return response()->json([
-          'success' => false,
+          'ok' => false,
           'message' => $message
         ], $code);
     }
