@@ -6,7 +6,7 @@ use League\Fractal\Serializer\ArraySerializer;
 class ApiSerializer extends ArraySerializer {
     public function null($message = null)
     {
-        $null = ['success' => true];
+        $null = ['ok' => true];
         if(!empty($message)) {
           $null['message'] = $message;
         }
