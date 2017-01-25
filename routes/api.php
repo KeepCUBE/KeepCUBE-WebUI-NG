@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redis;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 })->middleware('auth:api');*/
 
 Route::post('/auth', 'AuthController@authenticate');
-//Route::post('/register', 'RegisterController@register');
+Route::post('/register', 'RegisterController@register');
 
 Route::group([
   'middleware' => 'jwt',
@@ -28,3 +28,7 @@ Route::group([
   Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
 
 });
+
+/*Route::get('/action', function () {
+    Redis::publish('keepi:action', json_encode(['#ahojdaw' => '#ajdiwd']));
+  });*/
