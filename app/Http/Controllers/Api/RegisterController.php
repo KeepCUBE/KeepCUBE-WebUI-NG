@@ -2,7 +2,7 @@
 
 namespace KC\Http\Controllers\Api;
 
-use KC\Models\User;
+use KC\Models\User\User;
 use Validator;
 use KC\Http\Controllers\Api\Controller;
 use Illuminate\Foundation\Auth\RedirectsUsers;
@@ -40,7 +40,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request, Response $response)
     {
-        $data = $request->only(['email', 'password','username']);
+        $data = $request->only(['email', 'password','name']);
 
         $validation = $this->validator($request->all());
 
