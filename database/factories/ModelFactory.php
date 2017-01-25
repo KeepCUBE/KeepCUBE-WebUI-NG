@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(KC\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(KC\Models\User\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
