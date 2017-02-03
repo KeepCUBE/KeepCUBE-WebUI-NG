@@ -1,6 +1,6 @@
 <template>
     <modal>
-        <h1>Accessory Modal</h1>
+        <h3>Accessory Modal</h3>
     </modal>
 </template>
 <style>

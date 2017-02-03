@@ -7,10 +7,6 @@
             </label>
         </div>
 
-        <div class="modals" id="modalHandler">
-            <h1>Hello world</h1>
-        </div>
-
         <div class="mdl-grid">
             <div v-for="(homeCard, index) in homeCards" class="mdl-cell mdl-cell--4-col mdl-card">
                 <div class="mdl-card__title">{{ homeCard.title }}</div>
@@ -29,9 +25,6 @@
                 <i class="material-icons">add</i>
             </div>
         </div>
-
-
-        {{ editMode }}
     </div>
 </template>
 

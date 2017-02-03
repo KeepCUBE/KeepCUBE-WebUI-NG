@@ -55,6 +55,7 @@
     }
     .closeBtn {
         cursor: pointer;
+        float:left;
     }
 </style>
 <script>

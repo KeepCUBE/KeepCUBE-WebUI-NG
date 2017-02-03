@@ -1,6 +1,5 @@
 <template>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-        <!--<div class="modal-wrapper"><div class="modal-container"><div class="closeBtn"><i class="material-icons">clear</i></div> </div></div>-->
         <div class="mdl-layout__drawer" :class="{pushback: modal}">
             <div class="mdl-layout-logo"><img src="/imgs/layout/logo.svg"></div>
             <navigation></navigation>

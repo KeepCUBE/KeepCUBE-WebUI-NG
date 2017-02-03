@@ -4,7 +4,7 @@
         <div class="operation-bar">
             <mode-button v-for="(value, mode) in 3" v-on:click.native="changeMode(mode)" v-bind:mode="mode"></mode-button>
         </div>
-        <div class="mdl-grid">
+        <div class="mdl-grid mdl-grid--no-spacing">
             <template v-if="mode == '0'">
                 <div v-for="type in types" class="mdl-card mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-cell">
                     <div class="mdl-card__title">
@@ -21,14 +21,21 @@
             </template>
             <template v-if="mode == '2'">
                 <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Name</th>
+                            <th>Type</th>
+                            <th>Groups</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                    <tr v-for="accessory in accessories" @click="openModal">
-                        <td class="mdl-data-table__cell--non-numeric">{{ accessory.title }}</td>
-                        <td>{{ findTypeById(accessory.typeId).title }}</td>
-                        <td>
-                            <span v-for="group in findGroupsByIds(accessory.groups)">{{ group.title }}, </span>
-                        </td>
-                    </tr>
+                        <tr v-for="accessory in accessories" @click="openModal">
+                            <td class="mdl-data-table__cell--non-numeric">{{ accessory.title }}</td>
+                            <td>{{ findTypeById(accessory.typeId).title }}</td>
+                            <td>
+                                <span v-for="group in findGroupsByIds(accessory.groups)">{{ group.title }}, </span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </template>
@@ -78,37 +85,6 @@
                         ],
                     },
                 ],
-/*
-                accessories: [
-                    {
-                        id: 34,
-                        title: 'Main light in room 1',
-                        typeId: 10,
-                        groups: [
-                            4, //room 1
-                            2, //lights
-                        ]
-                    },
-                    {
-                        id: 48,
-                        title: 'Light above bed in room 1',
-                        typeId: 10,
-                        groups: [
-                            4, //room 1
-                            2, //lights
-                        ]
-                    },
-                    {
-                        id: 49,
-                        title: 'Sunblind in room 1',
-                        typeId: 14,
-                        groups: [
-                            4, //room 1
-                            6, //sunblinds
-                        ]
-                    },
-                ]
-*/
             }
         },
         methods: {
@@ -154,6 +130,8 @@
         created() {
             this.$store.dispatch('getAccessoriesFromApi');
             this.$bus.on('modal-close', this.closeModal);
+
+
         },
         destroyed() {
             this.$bus.off('modal-close', this.closeModal);
