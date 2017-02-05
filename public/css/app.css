@@ -874,7 +874,7 @@ main {
 /* Dialog */
 html, body {
   font-family: "Helvetica", "Arial", sans-serif;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 20px; }
 
@@ -6907,6 +6907,53 @@ input.mdl-button[type="submit"] {
   width: 100%;
   z-index: 0;
   overflow: hidden; }
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  -webkit-transition: opacity .3s ease;
+  transition: opacity .3s ease; }
+  .modal-mask .modal-wrapper {
+    display: table-cell;
+    vertical-align: middle; }
+  .modal-mask .modal-container {
+    width: 70%;
+    margin: 0px auto;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif; }
+    .modal-mask .modal-container .closeBtn {
+      cursor: pointer;
+      float: left;
+      margin-right: 18px; }
+      .modal-mask .modal-container .closeBtn .material-icons {
+        font-size: 3.8rem;
+        background-color: rgb(82,182,236);
+        color: white;
+        padding: 3px; }
+    .modal-mask .modal-container h2 {
+      font-size: 3.8rem;
+      margin-top: 0; }
+    .modal-mask .modal-container .step-desc {
+      color: rgb(82,182,236);
+      font-size: 1.4rem; }
+  .modal-mask .modal-enter {
+    opacity: 0; }
+  .modal-mask .modal-leave-active {
+    opacity: 0; }
+  .modal-mask .modal-enter .modal-container,
+  .modal-mask .modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
 
 .operation-bar {
   display: -webkit-box;

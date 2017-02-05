@@ -1,6 +1,7 @@
 <template>
     <div id="accessories">
-        <accessory-modal v-if="visible"></accessory-modal>
+        <new-device v-if="visibleModal == 'new'"></new-device>
+        <device-modal v-if="visibleModal == 'detail'"></device-modal>
         <div class="operation-bar">
             <mode-button v-for="(value, mode) in 3" v-on:click.native="changeMode(mode)" v-bind:mode="mode"></mode-button>
         </div>
@@ -29,11 +30,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="accessory in accessories" @click="openModal">
-                            <td class="mdl-data-table__cell--non-numeric">{{ accessory.title }}</td>
-                            <td>{{ findTypeById(accessory.typeId).title }}</td>
+                        <tr v-for="device in devices" @click="showDetail">
+                            <td class="mdl-data-table__cell--non-numeric">{{ device.title }}</td>
+                            <td>{{ findTypeById(device.typeId).title }}</td>
                             <td>
-                                <span v-for="group in findGroupsByIds(accessory.groups)">{{ group.title }}, </span>
+                                <span v-for="group in findGroupsByIds(device.groups)">{{ group.title }}, </span>
                             </td>
                         </tr>
                     </tbody>
@@ -44,101 +45,80 @@
 </template>
 
 <script>
-    import AccessoryModal from './AccessoryModal.vue';
-    import ModeButton from './ModeButton.vue';
+    import DeviceModal from './DeviceModal.vue'
+    import ModeButton from './ModeButton.vue'
+    import NewDevice from './NewDevice/NewDevice.vue'
     export default{
         data(){
             return{
-                visible: false,
+                visibleModal: 'new',
                 mode: 2, //mode of view [0 = types, 1 = groups, 2 = all]
-                types: [
-                    {
-                        id: 10,
-                        title: 'HUE',
-                        accessories: [
-                            34,
-                        ],
-                    },
-                    {
-                        id: 14,
-                        title: 'Stepper Motor',
-                    },
-                ],
-                groups: [ //groups shall either include accessories, types and other groups while everything shall be unique
-                    {
-                        id: 2,
-                        title: 'Lights',
-                    },
-                    {
-                        id: 4,
-                        title: 'Room 1',
-                        accessories: [
-                            34,
-                            48,
-                        ],
-                    },
-                    {
-                        id: 6,
-                        title: 'Sunblinds',
-                        accessories: [
-                            49,
-                        ],
-                    },
-                ],
+                newDevice: true,
             }
         },
         methods: {
             changeMode: function (mode) {
-                this.mode = mode;
+                this.mode = mode
             },
             findTypeById(id) {
                 let filteredType = this.types.filter(function (type) {
-                    return type.id == id;
+                    return type.id == id
                 });
 
                 if(filteredType.length === 1)
-                    return filteredType[0];
+                    return filteredType[0]
                 else
-                    return false;
+                    return false
             },
             findGroupsByIds(ids) {
 
-                let filteredGroups = [];
+                let filteredGroups = []
 
                 for(let i = 0; i < ids.length; i++) {
                     let filteredGroup = this.groups.filter(function (group) {
-                        return group.id == ids[i];
-                    });
+                        return group.id == ids[i]
+                    })
 
-                    if(filteredGroup.length === 1)
-                        filteredGroups.push(filteredGroup[0]);
+                    if(filteredGroup.length === 1) {
+                        filteredGroups.push(filteredGroup[0])
+                    }
                 }
 
-                return filteredGroups;
+                return filteredGroups
             },
-            openModal() {
-                this.visible = true;
+            showDetail() {
+                this.visibleModal = "detail"
+            },
+            newDevice() {
+                this.visibleModal = "new"
             },
             closeModal() {
-                this.visible = false;
+                this.visibleModal = false
             }
         },
-        components:{
+        components: {
             ModeButton,
-            AccessoryModal
+            DeviceModal,
+            NewDevice
         },
         created() {
-            this.$store.dispatch('getAccessoriesFromApi');
-            this.$bus.on('modal-close', this.closeModal);
-
-
+            this.$store.dispatch('getDevicesFromApi')
+            this.$store.dispatch('getGroupsFromApi')
+            this.$store.dispatch('getTypesFromApi')
+            this.$bus.on('modal-close', this.closeModal)
         },
         destroyed() {
-            this.$bus.off('modal-close', this.closeModal);
+            this.$bus.off('modal-close', this.closeModal)
         },
         computed: {
-            accessories() {
-                return this.$store.getters.allAccessories;
+            devices() {
+                return this.$store.getters.allDevices
+            },
+            types() {
+                return this.$store.getters.allTypes
+            },
+            groups() {
+                return this.$store.getters.allGroups
             }
         }
     }

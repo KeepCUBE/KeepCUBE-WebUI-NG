@@ -41,7 +41,9 @@
             }
         },
         created() {
-            this.$bus.on('modal-close', () => {this.modal = false});
+            this.$bus.on('modal-close', () => {
+                setTimeout(() => {this.modal = false}, 300)
+            });
             this.$bus.on('modal-open', () => {this.modal = true});
         }
 

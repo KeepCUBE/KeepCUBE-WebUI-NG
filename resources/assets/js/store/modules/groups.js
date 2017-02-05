@@ -1,14 +1,30 @@
-const state = {};
+import * as api from '../../api/groups'
 
-const getters = {};
+const state = {
+  groups: []
+}
 
-const actions = {};
+const getters = {
+  allGroups: state => state.groups
+}
 
-const mutations = {};
+const actions = {
+  getGroupsFromApi({ commit }) {
+    api.getAllGroups(groups => {
+      commit('setGroups', {groups})
+    })
+  }
+}
+
+const mutations = {
+  setGroups(state, {groups}) {
+    state.groups = groups
+  }
+};
 
 export default {
-    state,
-    getters,
-    actions,
-    mutations
+  state,
+  getters,
+  actions,
+  mutations
 }
