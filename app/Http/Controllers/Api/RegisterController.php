@@ -38,11 +38,10 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request, Response $response)
+    public function register(Request $request)
     {
-        $data = $request->only(['email', 'password','name']);
-
-        $validation = $this->validator($request->all());
+        $data = $request->only(['email', 'password','username', 'password_confirmation']);
+        $validation = $this->validator($data);
 
         if($validation->fails()) {
           return $validation->errors();
