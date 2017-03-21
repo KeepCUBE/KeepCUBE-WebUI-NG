@@ -2,7 +2,7 @@
 
 namespace KC\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
+use KC\Http\Requests\DeviceRequests\DeviceRequest;
 use KC\Models\Device\Device;
 use KC\Http\Controllers\Controller;
 
@@ -33,7 +33,7 @@ class DeviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeviceRequest $request)
     {
         return Device::create($request->all());
     }
@@ -57,7 +57,7 @@ class DeviceController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +69,7 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return Device::findOrFail($id)->update($request->all());
     }
 
     /**
@@ -80,6 +80,6 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Device::destroy($id);
     }
 }
