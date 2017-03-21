@@ -1,7 +1,7 @@
 <?php
 namespace KC\Serializers;
 
-use League\Fractal\Serializer\ArraySerializer;
+use Spatie\Fractalistic\ArraySerializer;
 
 class ApiSerializer extends ArraySerializer {
     public function null($message = null)
