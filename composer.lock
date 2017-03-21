@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f61ee425a3ef32d913c91d584b2cd601",
+    "content-hash": "1e9a7d0c79a7e4cd329e023b0e57a345",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1306,16 +1306,16 @@
         },
         {
             "name": "spatie/laravel-fractal",
-            "version": "3.3.1",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-fractal.git",
-                "reference": "b61276ed4a8cb418377ded396d0f933020bae104"
+                "reference": "16689b0ce340bc139ba767f0bf2904e4eab2b254"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/b61276ed4a8cb418377ded396d0f933020bae104",
-                "reference": "b61276ed4a8cb418377ded396d0f933020bae104",
+                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/16689b0ce340bc139ba767f0bf2904e4eab2b254",
+                "reference": "16689b0ce340bc139ba767f0bf2904e4eab2b254",
                 "shasum": ""
             },
             "require": {
@@ -1349,7 +1349,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "A Fractal service provider for Laravel",
+            "description": "A Fractal service provider for Laravel and Lumen",
             "homepage": "https://github.com/spatie/laravel-fractal",
             "keywords": [
                 "api",
@@ -1360,7 +1360,7 @@
                 "spatie",
                 "transform"
             ],
-            "time": "2017-01-28T08:37:24+00:00"
+            "time": "2017-02-21T23:17:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
