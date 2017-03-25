@@ -4,7 +4,10 @@ namespace KC\Http\Controllers\Api\V1;
 
 use KC\Http\Requests\DeviceRequests\DeviceRequest;
 use KC\Models\Device\Device;
-use KC\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use KC\Services\DeviceServices\DeviceFetcher;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use KC\Http\Controllers\Api\Controller;
 
 class DeviceController extends Controller
 {
@@ -13,18 +16,9 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(DeviceFetcher $fetcher)
     {
-        return Device::paginate(15);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
+        return $fetcher->paginate();
     }
 
     /**
@@ -44,20 +38,9 @@ class DeviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DeviceFetcher $fetcher, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
+        return $fetcher->find($id);
     }
 
     /**
@@ -69,7 +52,13 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return Device::findOrFail($id)->update($request->all());
+        try {
+            $device = Device::findOrFail($id);
+            $device->update($request->all());
+            return $this->successResponse("Device {$device->name} updated.");
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            throw new NotFoundHttpException('chyba');
+        }
     }
 
     /**
