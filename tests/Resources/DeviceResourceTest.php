@@ -66,4 +66,16 @@ class DeviceResourceTest extends TestCase
         $response->seeStatusCode(404);
         $response->seeJson(['ok' => false]);
     }
+    public function testDeviceCreate() {
+        $device = factory(Device::class)->make();
+        $response = $this->post(route('devices.store', $device->toArray()), [], $this->headers);
+        $response->seeStatusCode(200);
+        $response->seeJson(['ok' => true]);
+    }
+    public function testDeviceDestroy() {
+        $device = factory(Device::class)->create();
+        $response = $this->delete(route('devices.destroy', ['devices'=> $device->id]));
+        $response->seeStatusCode(200);
+        $this->notSeeInDatabase('devices', ['name' => $device->name]);
+    }
 }
