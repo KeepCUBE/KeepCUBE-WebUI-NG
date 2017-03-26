@@ -38,8 +38,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
-        //
     }
 
     /**
@@ -75,6 +73,24 @@ class RouteServiceProvider extends ServiceProvider
             'prefix' => 'keepi',
         ], function ($router) {
             require base_path('routes/api.php');
+            $this->mapJWTApiRoutes();
+        });
+    }
+    /**
+     * Define the "api" routes with jwt auth for the application
+     *
+     * These routes are typically stateless
+     *
+     * @return void
+     */
+    protected function mapJWTApiRoutes()
+    {
+        Route::group([
+            'middleware' => 'jwt',
+            'namespace' => 'V1',
+            'prefix' => 'v1'
+        ], function() {
+            require base_path('routes/jwt.php');
         });
     }
 }
