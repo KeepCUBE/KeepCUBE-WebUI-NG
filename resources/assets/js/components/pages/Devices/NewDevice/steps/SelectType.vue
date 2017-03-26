@@ -2,15 +2,11 @@
     <div>
         <div class="mdl-grid mdl-grid--no-spacing">
             <div class="step-desc mdl-cell">Please select a device type which you want to add.</div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                <div class="mdl-textfield__expandable-holder">
-                    <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
-                    <input class="mdl-textfield__input" type="text" id="sample6">
-                </div>
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                    <i class="material-icons">search</i>
-                </label>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="sample1">
+                <label class="mdl-textfield__label" for="sample1">Search</label>
             </div>
+            <label class="mdl-textfield__label" for="sample1"><i class="material-icons">search</i></label>
             <!--<div class="mdl-cell"><input type="text" id="type-search"><label for="type-search"><i class="material-icons">search</i></label></div>-->
         </div>
         <h3>Stock</h3>
