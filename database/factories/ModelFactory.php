@@ -1,5 +1,8 @@
 <?php
-
+use KC\Models\User\User;
+use KC\Models\Device\Device;
+use KC\Models\Type\Type;
+use KC\Models\Command\Command;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,7 +14,7 @@
 |
 */
 
-$factory->define(KC\Models\User\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -21,16 +24,22 @@ $factory->define(KC\Models\User\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
-
-$factory->define(KC\Models\Device\Device::class, function (Faker\Generator $faker) {
+$factory->define(Type::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'type_id' => $faker->randomNumber()
+        'name' => $faker->name
     ];
 });
 
-$factory->define(KC\Models\Type\Type::class, function (Faker\Generator $faker) {
+$factory->define(Device::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name
+        'name' => $faker->name,
+        'type_id' => factory(Type::class)->create()->id
+    ];
+});
+
+$factory->define(Command::class, function (Faker\Generator $faker) {
+    return [
+        'command' => '#SLPL4T2D1Pff0022ff0011ff0022;',
+        'type_id' => factory(Type::class)->create()->id
     ];
 });

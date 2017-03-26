@@ -2,7 +2,6 @@
 namespace KC\Services\DeviceServices;
 
 use KC\Models\Device\Device;
-use \stdClass;
 
 class DeviceCreator {
     private $device;
