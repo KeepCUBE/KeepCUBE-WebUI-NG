@@ -25,7 +25,7 @@ class DeviceRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'type_id' => 'required|max:255|unique:types'
+            'type_id' => 'required|max:255'
         ];
     }
 }
