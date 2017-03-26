@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(KC\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(KC\Models\User\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -19,5 +19,18 @@ $factory->define(KC\Models\User::class, function (Faker\Generator $faker) {
         'email' => $faker->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(KC\Models\Device\Device::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'type_id' => $faker->randomNumber()
+    ];
+});
+
+$factory->define(KC\Models\Type\Type::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
     ];
 });

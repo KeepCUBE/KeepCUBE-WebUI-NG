@@ -75,7 +75,7 @@ class Handler extends ExceptionHandler
      */
     private function responseJson($message, $code = 500) {
         return response()->json([
-          'success' => false,
+          'ok' => false,
           'message' => $message
         ], $code);
     }
@@ -89,7 +89,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $e)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return $this->responseJson('Unauthenticated.', 401);
         }
 
         return redirect()->guest('login');

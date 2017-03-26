@@ -3,14 +3,13 @@
 namespace KC\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-
-use KC\Http\Requests;
+use KC\Http\Requests\UserRequests\UserStoreRequest;
+use KC\Http\Requests\UserRequests\UserUpdateRequest;
 use KC\Http\Controllers\Api\Controller;
-use KC\Models\User;
-use Validator;
-use KC\Transformers\UserTransformer;
-use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-use KC\Serializers\ApiSerializer;
+use KC\Services\UserServices\UserCreator;
+use KC\Services\UserServices\UserFetcher;
+use KC\Services\UserServices\UserUpdater;
+use KC\Services\UserServices\UserDestroyer;
 
 class UserController extends Controller
 {
@@ -19,17 +18,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, UserFetcher $userFetcher)
     {
-        if($paginator = User::paginate(15)) {
-          $users = $paginator->getCollection();
-
-          return fractal()
-            ->collection($users, new UserTransformer)
-            ->paginateWith(new IlluminatePaginatorAdapter($paginator))
-            ->toArray();
+        try {
+            $perPage = $request->get('per_page') ?? 15;
+            return $userFetcher->paginate($request->all(), $perPage);
+        } catch(\Exception $e) {
+            throw $this->createNotFoundException('error.users.all');
         }
-        throw $this->createNotFoundException('error.users.all');
     }
 
     /**
@@ -38,17 +34,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request, UserCreator $userCreator)
     {
-        $validation = $this->validator($request->all());
-
-        if($validation->fails()) {
-          return $validation->errors();
-        }
-
-        $user = new User($request->all());
-        $user->save();
-
+        $user = $userCreator->store($request->all());
         return $this->successResponse("User {$user->name} created.");
     }
     /**
@@ -57,14 +45,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UserFetcher $userFetcher, $id)
     {
-        if ($user = User::find($id)) {
-          return fractal()
-            ->item($user, new UserTransformer)
-            ->toArray();
+        try {
+            $user = $userFetcher->find($id);
+            return $user;
+        } catch(\Exception $e) {
+            throw $this->createNotFoundException("No user with id {$id}");
         }
-        throw $this->createNotFoundException("No user with id {$id}");
     }
 
     /**
@@ -74,16 +62,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update(UserUpdateRequest $request,UserUpdater $userUpdater, $id)
     {
-        if(!$user = User::find($id)) {
-            throw $this->createNotFoundException("No user with id {$id}");
-        }
-        if(!$user->fill($request->all())) {
-            throw $this->createBadRequestException('Bad request');
-        }
-        $user->save();
-        return $this->successResponse("User {$user->name} updated.");
+        $user = $userUpdater->update($id, $request->all());
+        return $this->successResponse("User {$id} updated.");
     }
 
     /**
@@ -92,28 +74,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserDestroyer $userDestroy, $id)
     {
-        if(! $user = User::find($id)) {
-            throw $this->createNotFoundException("No user with id {$id}");
-        }
-        if(! $user->delete()) {
-            throw $this->createInternalErrorException("Got problem with deleting");
-        }
-        return $this->successResponse("User {$user->name} deleted.");
-    }
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:8|confirmed',
-        ]);
+        $user = $userDestroy->delete($id);
+        return $this->successResponse("User {$id} deleted.");
     }
 }

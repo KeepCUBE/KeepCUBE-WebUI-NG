@@ -1,12 +1,12 @@
 <?php
 namespace KC\Serializers;
 
-use League\Fractal\Serializer\ArraySerializer;
+use Spatie\Fractalistic\ArraySerializer;
 
 class ApiSerializer extends ArraySerializer {
     public function null($message = null)
     {
-        $null = ['success' => true];
+        $null = ['ok' => true];
         if(!empty($message)) {
           $null['message'] = $message;
         }

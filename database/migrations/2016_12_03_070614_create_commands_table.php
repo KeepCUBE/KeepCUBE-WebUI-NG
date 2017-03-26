@@ -16,7 +16,7 @@ class CreateCommandsTable extends Migration
         Schema::create('commands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('command');
-            $table->integer('device_id');
+            $table->integer('type_id');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateCommandsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('commands');
     }
 }

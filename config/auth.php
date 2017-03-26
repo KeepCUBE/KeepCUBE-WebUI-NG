@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => KC\Models\User::class,
+            'model' => KC\Models\User\User::class,
         ],
 
         // 'users' => [

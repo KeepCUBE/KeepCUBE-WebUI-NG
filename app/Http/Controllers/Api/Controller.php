@@ -7,7 +7,7 @@ abstract class Controller extends BaseController
 {
   protected function successResponse($message, $code=200) {
     return response()->json([
-      'success' => true,
+      'ok' => true,
       'message' => $message
     ], $code);
   }

@@ -176,6 +176,7 @@ return [
         KC\Providers\AppServiceProvider::class,
         KC\Providers\AuthServiceProvider::class,
         // KC\Providers\BroadcastServiceProvider::class,
+        KC\Providers\UserServiceProvider::class,
         KC\Providers\EventServiceProvider::class,
         KC\Providers\RouteServiceProvider::class,
 
