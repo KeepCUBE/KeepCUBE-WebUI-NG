@@ -1,30 +1,24 @@
-/**
- * Created by ddos on 30.11.16.
- */
-/**
- * Router components
- */
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-import accesories from './components/pages/Accessories/index.vue'
-import main from './components/pages/Dashboard/index.vue'
-import rooms from './components/pages/Rooms/index.vue'
-import users from './components/pages/Users/index.vue'
+import devices from './components/pages/Devices/Devices.vue'
+import main from './components/pages/Dashboard/Dashboard.vue'
+import rooms from './components/pages/Rooms/Rooms.vue'
+import users from './components/pages/Users/Users.vue'
 
 const routes = [
-    {path: '/', name: 'dashboard', component: main},
-    {path: '/home', name: 'dashboard', component: main},
-    {path: '/accessories', name: 'accessories', component: accesories},
-    {path: '/rooms', name: 'rooms', component: rooms},
-    {path: '/users', name: 'users', component: users},
-];
+  {path: '/', name: 'dashboard', component: main},
+  {path: '/home', name: 'dashboard', component: main},
+  {path: '/accessories', name: 'accessories', component: devices},
+  {path: '/rooms', name: 'rooms', component: rooms},
+  {path: '/users', name: 'users', component: users},
+]
 
 const router = new VueRouter({
-    mode: 'history',
-    routes
-});
+  mode: 'history',
+  routes
+})
 
-export default router;
+export default router
