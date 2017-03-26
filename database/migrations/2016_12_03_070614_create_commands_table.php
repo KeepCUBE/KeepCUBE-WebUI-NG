@@ -17,6 +17,7 @@ class CreateCommandsTable extends Migration
             $table->increments('id');
             $table->string('command');
             $table->integer('type_id');
+            $table->timestamps();
         });
     }
 
