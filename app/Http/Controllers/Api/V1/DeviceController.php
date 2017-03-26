@@ -29,7 +29,9 @@ class DeviceController extends Controller
      */
     public function store(DeviceRequest $request)
     {
-        return Device::create($request->all());
+        $device = Device::create($request->all());
+
+        return $this->successResponse("Device {$device->name} created");
     }
 
     /**
@@ -57,7 +59,7 @@ class DeviceController extends Controller
             $device->update($request->all());
             return $this->successResponse("Device {$device->name} updated.");
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            throw new NotFoundHttpException('chyba');
+            throw new NotFoundHttpException('Device not found');
         }
     }
 
@@ -69,6 +71,7 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        return Device::destroy($id);
+        $device = Device::destroy($id);
+        return $this->successResponse("Device $id successfully destroyed");
     }
 }
