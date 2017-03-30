@@ -52,9 +52,8 @@
     },
     methods: {
       select(e){
-        const val = e.target.dataset.id
-        const attr = 'type'
-        this.$store.dispatch('newDeviceSetAttr', {attr, val})
+        const val = Number(e.target.dataset.id)
+        this.$store.dispatch('newDeviceSetAttr', {attr: 'type_id', val})
         this.nextStep()
       }
     }

@@ -7,7 +7,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
   display: table;
-  transition: opacity .3s ease;
+  /*transition: opacity .3s ease;*/
 
   .modal-wrapper {
     display: table-cell;
@@ -20,7 +20,7 @@
     padding: 16px;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-    transition: all .3s ease;
+    /*transition: all .3s ease;*/
     font-family: Helvetica, Arial, sans-serif;
 
 
@@ -48,18 +48,12 @@
     }
   }
 
-  .modal-enter {
-    opacity: 0;
-  }
 
-  .modal-leave-active {
-    opacity: 0;
-  }
+}
+.modal-enter, .modal-leave-active {
+  opacity: 0;
+}
 
-  .modal-enter .modal-container,
-  .modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
-
+.modal-enter-active, .modal-leave-active {
+  transition: opacity .15s
 }

@@ -4,6 +4,7 @@ require('./bootstrap')
 import router from './router'
 import store from './store'
 import VueBus from 'vue-bus'
+import http from 'vue'
 
 Vue.use(VueBus)
 
@@ -21,13 +22,16 @@ Vue.config.silent = false
 new Vue({
   router,
   store,
+  http,
   el: '#app',
   filters: {
   },
   created() {
     window.addEventListener('keyup', (event) => {
-      if(event.code == 'Escape'){
+      if(event.code == 'Escape' || event.keyCode == 27){
         this.$bus.$emit('esc-press')
+      } else if(event.code == 'Enter') {
+        this.$bus.$emit('enter-press')
       }
     })
   }

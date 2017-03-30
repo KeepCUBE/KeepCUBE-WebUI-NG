@@ -1,7 +1,9 @@
 <template>
     <div id="accessories">
-        <new-device v-if="visibleModal == 'new'"></new-device>
-        <device-modal v-if="visibleModal == 'detail'"></device-modal>
+        <transition name="modal">
+            <new-device v-if="visibleModal == 'new'"></new-device>
+            <device-modal v-if="visibleModal == 'detail'"></device-modal>
+        </transition>
         <div class="operation-bar">
             <mode-button v-for="(value, mode) in 3" v-on:click.native="changeMode(mode)" v-bind:mode="mode"></mode-button>
         </div>
@@ -97,18 +99,19 @@
             }
         },
         components: {
-            ModeButton,
-            DeviceModal,
-            NewDevice
+          ModeButton,
+          DeviceModal,
+          NewDevice
         },
         created() {
-            this.$store.dispatch('getDevicesFromApi')
-            this.$store.dispatch('getGroupsFromApi')
-            this.$store.dispatch('getTypesFromApi')
-            this.$bus.on('modal-close', this.closeModal)
+          this.$store.dispatch('getDevicesFromApi')
+          this.$store.dispatch('getGroupsFromApi')
+          this.$store.dispatch('getTypesFromApi')
+          this.$store.dispatch('newDeviceSplash')
+          this.$bus.on('modal-close', this.closeModal)
         },
         destroyed() {
-            this.$bus.off('modal-close', this.closeModal)
+          this.$bus.off('modal-close', this.closeModal)
         },
         computed: {
             devices() {
