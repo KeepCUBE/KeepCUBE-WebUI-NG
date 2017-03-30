@@ -6917,8 +6917,7 @@ input.mdl-button[type="submit"] {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  -webkit-transition: opacity .3s ease;
-  transition: opacity .3s ease; }
+  /*transition: opacity .3s ease;*/ }
   .modal-mask .modal-wrapper {
     display: table-cell;
     vertical-align: middle; }
@@ -6928,8 +6927,7 @@ input.mdl-button[type="submit"] {
     padding: 16px;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
+    /*transition: all .3s ease;*/
     font-family: Helvetica, Arial, sans-serif; }
     .modal-mask .modal-container .closeBtn {
       cursor: pointer;
@@ -6946,14 +6944,13 @@ input.mdl-button[type="submit"] {
     .modal-mask .modal-container .step-desc {
       color: rgb(82,182,236);
       font-size: 1.4rem; }
-  .modal-mask .modal-enter {
-    opacity: 0; }
-  .modal-mask .modal-leave-active {
-    opacity: 0; }
-  .modal-mask .modal-enter .modal-container,
-  .modal-mask .modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1); }
+
+.modal-enter, .modal-leave-active {
+  opacity: 0; }
+
+.modal-enter-active, .modal-leave-active {
+  -webkit-transition: opacity .15s;
+  transition: opacity .15s; }
 
 .operation-bar {
   display: -webkit-box;

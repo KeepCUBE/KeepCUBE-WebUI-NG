@@ -14,9 +14,11 @@ require('vue-resource')
 
 Vue.http.interceptors.push((request, next) => {
   request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken
-
+  request.headers['Accept'] = 'application/json'
   next()
-});
+})
+Vue.http.options.root = '//localhost:8000/keepi/v1'
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

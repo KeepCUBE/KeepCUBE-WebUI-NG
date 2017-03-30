@@ -46,6 +46,5 @@
             });
             this.$bus.on('modal-open', () => {this.modal = true});
         }
-
     }
 </script>

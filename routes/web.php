@@ -15,9 +15,9 @@
     return view('welcome');
 });*/
 
-/*Route::get('/{catchall?}', function () {
+Route::get('/{catchall?}', function () {
     return response()->view('welcome');
-})->where('catchall', '(.*)');*/
+})->where('catchall', '(.*)');
 
 Auth::routes();
 
