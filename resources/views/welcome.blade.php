@@ -8,8 +8,9 @@
         <title>KeepCUBE</title>
 
         <!-- Styles -->
+        <link rel="stylesheet" href="{{ elixir('fonts/material-icons.css') }}">
         <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        {{--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--}}
 
         <script>
           window.Laravel = { csrfToken: '{{ csrf_token() }}' }
