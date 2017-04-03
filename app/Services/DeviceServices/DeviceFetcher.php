@@ -19,7 +19,7 @@ class DeviceFetcher {
             $device = $this->device->findOrFail($id);
             return $this->fractal->item($device, new DeviceTransformer);
         } catch(\Exception $e) {
-            throw new NotFoundHttpException('Hi');
+            throw new NotFoundHttpException("Device with id {$id} not found");
         }
     }
     public function paginate(array $query = null, $perPage = 15) {
