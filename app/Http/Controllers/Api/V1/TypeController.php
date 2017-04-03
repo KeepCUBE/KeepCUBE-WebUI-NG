@@ -2,7 +2,7 @@
 
 namespace KC\Http\Controllers\Api\V1;
 
-use KC\Models\DeviceType\DeviceType;
+use KC\Models\Type\Type;
 use Illuminate\Http\Request;
 use KC\Http\Controllers\Controller;
 
