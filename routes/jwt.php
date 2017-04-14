@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/commands/test/{command}', 'CommandController@test');
+Route::post('/commands/execute/{id}', 'CommandController@execute')->name('commands.execute');
 Route::resource('/commands', 'CommandController');
 Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
 Route::resource('/devices', 'DeviceController', ['except' => ['create', 'edit']]);
