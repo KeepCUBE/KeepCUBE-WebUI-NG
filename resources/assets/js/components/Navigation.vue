@@ -26,11 +26,9 @@
 
 
     export default{
-        components: {
-        },
         data() {
             return {
-                "links": links,
+                'links': links,
             }
         },
 

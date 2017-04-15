@@ -86,7 +86,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapJWTApiRoutes()
     {
         Route::group([
-            'middleware' => 'jwt',
+            /*'middleware' => 'jwt',*/
             'namespace' => 'V1',
             'prefix' => 'v1'
         ], function() {

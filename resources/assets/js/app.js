@@ -1,47 +1,38 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
+require('./bootstrap')
 
-require('./bootstrap');
+import router from './router'
+import store from './store'
+import VueBus from 'vue-bus'
+import http from 'vue'
 
-require('./vendor/material.min');
+Vue.use(VueBus)
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
+Vue.component('App', require('./components/App.vue'))
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+Vue.directive('mdl', {
+  bind: function (el) {
+    componentHandler.upgradeElement(el)
+  }
+})
 
-import accesories from './components/pages/Accessories.vue'
-import main from './components/pages/Main.vue'
-import rooms from './components/pages/Rooms.vue'
-import users from './components/pages/Users.vue'
+Vue.config.devtools = true
+Vue.config.silent = false
 
-const routes = [
-    { path: '/home',        name: 'dashboard',  component: main },
-    { path: '/accessories', name: 'accessories',component: accesories },
-    { path: '/rooms',       name: 'rooms',      component: rooms },
-    { path: '/users',       name: 'users',      component: users },
-];
-
-const router = new VueRouter({
-    mode: 'history',
-    routes
-});
-
-Vue.component('App', require('./components/App.vue'));
-
-Vue.config.devtools = true;
-Vue.config.silent = false;
 new Vue({
-    router,
-    el: '#app',
-    filters: {
-    }
-});
+  router,
+  store,
+  http,
+  el: '#app',
+  filters: {
+  },
+  created() {
+    window.addEventListener('keyup', (event) => {
+      if(event.code == 'Escape' || event.keyCode == 27){
+        this.$bus.$emit('esc-press')
+      } else if(event.code == 'Enter') {
+        this.$bus.$emit('enter-press')
+      }
+    })
+  }
+})

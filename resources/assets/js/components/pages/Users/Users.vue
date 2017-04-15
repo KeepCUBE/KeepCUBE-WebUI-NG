@@ -12,10 +12,9 @@
     export default{
         data(){
             return{
-                header:'Users'
             }
         },
         components:{
-        }
+        },
     }
 </script>
