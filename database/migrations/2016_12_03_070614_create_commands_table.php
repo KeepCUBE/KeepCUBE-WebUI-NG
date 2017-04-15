@@ -15,8 +15,9 @@ class CreateCommandsTable extends Migration
     {
         Schema::create('commands', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('command');
             $table->integer('type_id');
+            $table->boolean('template');
+            $table->json('command_scheme');
             $table->timestamps();
         });
     }

@@ -2,11 +2,12 @@
 
 namespace KC\Http\Controllers\Api\V1;
 
-use KC\Models\Type\Type;
 use Illuminate\Http\Request;
-use KC\Http\Controllers\Controller;
+use KC\Http\Controllers\Api\Controller;
+use KC\Models\Command\Command;
+use KC\Services\CommandServices\CommandSender;
 
-class TypeController extends Controller
+class CommandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        return DeviceType::paginate(15);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        
     }
 
     /**
@@ -36,7 +27,9 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        return DeviceType::create($request->all());
+        $command = Command::create($request->all());
+
+        return $this->successResponse("Command {$command->name} created.");
     }
 
     /**
@@ -47,18 +40,7 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Command::findOrFail($id);
     }
 
     /**
@@ -70,7 +52,7 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return DeviceType::update($request->all());
+        return Command::update($request->all(), $id);
     }
 
     /**
@@ -81,6 +63,19 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Command::destroy($id)) {
+            return $this->successResponse("Command destroyed successfully");
+        }
+    }
+    /**
+     * Execute command
+     *
+     */
+    public function execute(Command $command, CommandSender $sender, $id) {
+        $command = $command->find($id);
+        $route = $command->type->route;
+        $sender->send($command, $route);
+
+        return $this->successResponse("Command executed successfuly");
     }
 }
