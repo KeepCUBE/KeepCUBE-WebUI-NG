@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(TypeTableSeeder::class);
         $this->call(DeviceTableSeeder::class);
+        $this->call(RouteTableSeeder::class);
     }
 }

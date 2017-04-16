@@ -168,6 +168,7 @@ return [
          */
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
+        'Baum\Providers\BaumServiceProvider',
         //
 
         /*
