@@ -11,14 +11,25 @@ const getters = {
 const actions = {
   getGroupsFromApi({ commit }) {
     api.getAllGroups(groups => {
-      commit('setGroups', {groups})
+      commit('SET_GROUPS', {groups})
     })
+  },
+  createGroup({ commit }) {
+    /*api.createGroup({ commit }, id => {*/
+      commit('ADD_GROUP', {devices: []})
+    /*})*/
   }
 }
 
 const mutations = {
-  setGroups(state, {groups}) {
+  SET_GROUPS(state, {groups}) {
     state.groups = groups
+  },
+  ADD_GROUP(state, group) {
+    state.groups.push(group)
+  },
+  REMOVE_GROUP(state, key) {
+    delete state.groups[key]
   }
 };
 

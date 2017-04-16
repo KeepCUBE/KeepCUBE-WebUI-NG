@@ -6,6 +6,9 @@
                 <label class="mdl-textfield__label" for="device_name">Name</label>
             </div>
         </div>
+        <button @click="save" class="mdl-button mdl-js-button mdl-button--colored">
+            Uložit
+        </button>
     </div>
 </template>
 <style>
@@ -20,6 +23,12 @@
       }
     },
     methods: {
+      save() {
+        if(this.$store.getters.newDeviceData.name) {
+          this.$store.dispatch('newDeviceSplash')
+          this.$bus.emit('modal-close')
+        }
+      },
     },
     computed: {
       name: {

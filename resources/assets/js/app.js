@@ -1,5 +1,6 @@
 
 require('./bootstrap')
+require('../../../vendor/bower_dl/timeliner/timeliner')
 
 import router from './router'
 import store from './store'
@@ -13,6 +14,11 @@ Vue.component('App', require('./components/App.vue'))
 Vue.directive('mdl', {
   bind: function (el) {
     componentHandler.upgradeElement(el)
+  }
+})
+Vue.directive('timeliner', {
+  bind: function (el) {
+    new Timeliner(el)
   }
 })
 

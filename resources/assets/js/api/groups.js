@@ -1,9 +1,13 @@
 const data = require('./groups.mock')
-const LATENCY = 16
 
 export function getAllGroups (cb) {
+  cb(data)
+}
 
-  setTimeout(() => {
-    cb(data)
-  }, LATENCY)
+export function createGroup (cb) {
+  Vue.http.post('groups').then(response => {
+    console.log(response)
+  }, response => {
+    console.log(response)
+  })
 }

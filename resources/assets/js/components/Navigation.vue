@@ -17,11 +17,13 @@
         {
             'title': "Accessories",
             'link': "/accessories",
-        },
+        }
+/*
         {
             'title': "Users",
             'link': "/users"
         },
+*/
     ]
 
 

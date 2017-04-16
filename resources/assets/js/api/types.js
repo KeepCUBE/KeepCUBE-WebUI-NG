@@ -1,3 +1,4 @@
+
 const data = require('./types.mock')
 const LATENCY = 16
 

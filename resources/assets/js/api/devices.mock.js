@@ -1,8 +1,8 @@
 module.exports = [
   {
     id: 34,
-    title: 'Main light in room 1',
-    typeId: 10,
+    name: 'Main light in room 1',
+    type_id: 10,
     groups: [
       4, //room 1
       2, //lights
@@ -10,8 +10,8 @@ module.exports = [
   },
   {
     id: 48,
-    title: 'Light above bed in room 1',
-    typeId: 10,
+    name: 'Light above bed in room 1',
+    type_id: 10,
     groups: [
       4, //room 1
       2, //lights
@@ -19,8 +19,8 @@ module.exports = [
   },
   {
     id: 49,
-    title: 'Sunblind in room 1',
-    typeId: 14,
+    name: 'Sunblind in room 1',
+    type_id: 14,
     groups: [
       4, //room 1
       6, //sunblinds

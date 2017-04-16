@@ -1,11 +1,11 @@
 module.exports = [
   {
     id: 2,
-    title: 'Lights',
+    name: 'Lights',
   },
   {
     id: 4,
-    title: 'Room 1',
+    name: 'Room 1',
     devices: [
       34,
       48,
@@ -13,7 +13,7 @@ module.exports = [
   },
   {
     id: 6,
-    title: 'Sunblinds',
+    name: 'Sunblinds',
     devices: [
       49,
     ],

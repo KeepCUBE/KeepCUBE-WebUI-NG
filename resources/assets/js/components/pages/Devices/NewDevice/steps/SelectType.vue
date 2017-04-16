@@ -14,7 +14,7 @@
         <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
             <tbody>
             <tr v-for="stock in stocks" @click="select">
-                <td class="mdl-data-table__cell--non-numeric" :data-id="stock.id" >{{ stock.title }}</td>
+                <td class="mdl-data-table__cell--non-numeric" :data-id="stock.id" >{{ stock.name }}</td>
                 <td></td>
             </tr>
             </tbody>

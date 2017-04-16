@@ -9,6 +9,7 @@
   ],
   "dependencies": {
     "vex": "HubSpot/vex#^3.0.0",
-    "material-design-icons": "^3.0.1"
+    "material-design-icons": "^3.0.1",
+    "timeliner": "KeepCUBE/timeliner#^1.6.0"
   }
 }
