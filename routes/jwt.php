@@ -15,4 +15,5 @@ Route::post('/commands/execute/{id}', 'CommandController@execute')->name('comman
 Route::resource('/commands', 'CommandController');
 Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);
 Route::resource('/devices', 'DeviceController', ['except' => ['create', 'edit']]);
+Route::resource('/rooms', 'RoomController', ['except' => ['create', 'edit']]);
 
