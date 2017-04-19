@@ -79,11 +79,4 @@ class CommandController extends Controller
 
         return $this->successResponse("Command executed successfuly");
     }
-    public function slain(Request $request, CommandSender $sender, Type $type) {
-        $type = $type->find($request->input('type_id'));
-        $route = $type->route;
-        $sender->send($request->input('command_scheme'), $route);
-
-        return $this->successResponse("Command executed successfuly");
-    }
 }
