@@ -4,7 +4,7 @@
             <!--<div id="timeliner" v-timeliner ></div>-->
             <input type="color" v-model="ledColor">
             <div :style="{backgroundColor: ledColor}" class="led"></div>
-            <button :click="send" class="mdl-button">Send</button>
+            <button @click="send" class="mdl-button">Send</button>
         </div>
     </div>
 </template>
@@ -74,6 +74,7 @@
       },
       methods: {
         send(){
+          console.log('Calling API')
           api.sendLedConf({color: this.ledColor})
         },
       },

@@ -3,7 +3,7 @@
  */
 export function sendLedConf (configuration) {
 
-  values = {
+  const values = {
     L: 1,
     C: [
       configuration.color
@@ -12,8 +12,8 @@ export function sendLedConf (configuration) {
       1000
     ]
   }
-  
-  JSON.stringify(
+
+  configuration = JSON.stringify(
     {
       type_id: 1,
       command_scheme: {
@@ -22,7 +22,8 @@ export function sendLedConf (configuration) {
       }
     }
   )
-  Vue.http.post('commands/execute', configuration).then(response => {
+  console.log('Sending', configuration)
+  Vue.http.post('commands/slain', configuration).then(response => {
     console.log(response.body)
   }, response => {
     console.log(response.body)
