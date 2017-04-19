@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use KC\Models\Device\Device;
+use KC\Models\Room\Room;
 use KC\Models\DeviceType\DeviceType;
 
 class DeviceResourceTest extends TestCase
@@ -13,11 +14,7 @@ class DeviceResourceTest extends TestCase
     private $headers = [
       'Accept' => 'application/json'
     ];
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+
     public function testDeviceIndex()
     {
         $devices = factory(Device::class, 4)->create();
@@ -67,7 +64,8 @@ class DeviceResourceTest extends TestCase
         $response->seeJson(['ok' => false]);
     }
     public function testDeviceCreate() {
-        $device = factory(Device::class)->make();
+        $room = factory(Room::class)->create();
+        $device = factory(Device::class)->make(['room_id' => $room->id]);
         $response = $this->post(route('devices.store', $device->toArray()), [], $this->headers);
         $response->seeStatusCode(200);
         $response->seeJson(['ok' => true]);
