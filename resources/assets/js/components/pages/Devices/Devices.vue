@@ -2,7 +2,7 @@
     <div id="accessories">
         <transition name="modal">
             <new-device v-if="visibleModal == 'new'"></new-device>
-            <device-modal v-if="visibleModal == 'detail'"></device-modal>
+            <device-modal v-bind:device="openedDevice" v-if="visibleModal == 'detail'"></device-modal>
         </transition>
         <div class="operation-bar">
             <mode-button v-for="(value, mode) in 3" v-on:click.native="changeMode(mode)" v-bind:mode="mode"></mode-button>
@@ -11,14 +11,14 @@
             <template v-if="mode == '0'">
                 <div v-for="type in types" class="mdl-card mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-cell">
                     <div class="mdl-card__title">
-                        <div class="mdl-card__title-text">{{ type.title }}</div>
+                        <div class="mdl-card__title-text">{{ type.name }}</div>
                     </div>
                 </div>
             </template>
             <template v-if="mode == '1'">
                 <div v-for="group in groups" class="mdl-card mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-cell">
                     <div class="mdl-card__title">
-                        <div class="mdl-card__title-text">{{ group.title }}</div>
+                        <div class="mdl-card__title-text">{{ group.name }}</div>
                     </div>
                 </div>
             </template>
@@ -32,11 +32,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="device in devices" @click="showDetail">
-                            <td class="mdl-data-table__cell--non-numeric">{{ device.title }}</td>
-                            <td>{{ findTypeById(device.typeId).title }}</td>
+                        <tr v-for="device in devices" @click="showDetail(device)">
+                            <td class="mdl-data-table__cell--non-numeric">{{ device.name }}</td>
+                            <td>{{ findTypeById(device.type_id).name }}</td>
                             <td>
-                                <span v-for="group in findGroupsByIds(device.groups)">{{ group.title }}, </span>
+                                <span v-for="group in findGroupsByIds(device.groups)">{{ group.name }}, </span>
+                            </td>
+                        </tr>
+                        <tr @click="newDevice()">
+                            <td colspan="10">
+                                <div style="display: flex; justify-content: center">
+                                    <i class="material-icons">add</i>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -53,9 +60,9 @@
     export default{
         data(){
             return{
-                visibleModal: 'new',
-                mode: 2, //mode of view [0 = types, 1 = groups, 2 = all]
-                newDevice: true,
+              visibleModal: 0,
+              mode: 2, //mode of view [0 = types, 1 = groups, 2 = all]
+              openedDevice: null,
             }
         },
         methods: {
@@ -63,16 +70,17 @@
                 this.mode = mode
             },
             findTypeById(id) {
-                let filteredType = this.types.filter(function (type) {
-                    return type.id == id
+                let filteredType = this.types.filter((type) => {
+                  return type.id == id
                 });
 
-                if(filteredType.length === 1)
-                    return filteredType[0]
-                else
-                    return false
+                if(filteredType && filteredType.length === 1) {
+                  return filteredType[0]
+                } else {
+                  return false
+                }
             },
-            findGroupsByIds(ids) {
+            findGroupsByIds(ids = []) {
 
                 let filteredGroups = []
 
@@ -81,15 +89,16 @@
                         return group.id == ids[i]
                     })
 
-                    if(filteredGroup.length === 1) {
+                    if(filteredGroup && filteredGroup.length === 1) {
                         filteredGroups.push(filteredGroup[0])
                     }
                 }
 
                 return filteredGroups
             },
-            showDetail() {
-                this.visibleModal = "detail"
+            showDetail(device) {
+              this.visibleModal = "detail"
+              this.openedDevice = device
             },
             newDevice() {
                 this.visibleModal = "new"
@@ -104,10 +113,13 @@
           NewDevice
         },
         created() {
-          this.$store.dispatch('getDevicesFromApi')
-          this.$store.dispatch('getGroupsFromApi')
-          this.$store.dispatch('getTypesFromApi')
-          this.$store.dispatch('newDeviceSplash')
+          if(this.$store.getters.allDevices.length == 0) {
+              this.$store.dispatch('getDevicesFromApi')
+              this.$store.dispatch('getGroupsFromApi')
+              this.$store.dispatch('getTypesFromApi')
+            /*setTimeout(console.log(this.devices), 5000)*/
+
+          }
           this.$bus.on('modal-close', this.closeModal)
         },
         destroyed() {

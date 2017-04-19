@@ -2,7 +2,10 @@ import * as api from '../../api/devices'
 
 const state = {
   devices: [],
-  newDevice: {}
+  newDevice: {
+    name: '',
+    type_id: null
+  }
 }
 
 const getters = {
@@ -20,29 +23,37 @@ const actions = {
     commit('UPDATE_NEW_DEVICE', { [attr]: val})
   },
   newDeviceSplash({ commit }) {
-    if(state.newDevice.name && state.newDevice.type) {
-      if(api.postNewDevice(state.newDevice)) {
-        commit('ADD_DEVICE', state.newDevice)
-        state.newDevice = {}
-      }
+    if(state.newDevice.name && (state.newDevice.type_id || state.newDevice.type_id == 0)) {
+      api.postNewDevice(state.newDevice, newDevice => {
+        commit('ADD_DEVICE', newDevice)
+      })
     }
-
+  },
+  removeDevice({ commit }, key) {
+    api.deleteDevice(state.devices[key], key => {
+      commit('REMOVE_DEVICE', key)
+    })
   }
 }
 
 const mutations = {
   SET_DEVICES(state, {devices}) {
-    state.devices = devices
+    let reindexedDevices = {}
+    devices.forEach((item) => {
+     reindexedDevices[item.id] = item
+    })
+    state.devices = reindexedDevices
   },
-  ADD_DEVICE(state, {device}) {
-    state.devices.push(device)
+  ADD_DEVICE(state, device) {
+    //TODO API should return device id
+    state.devices[device.id] = (device)
   },
-  REMOVE_DEVICE(state, {id}) {
-    delete state.devices[id]
+  REMOVE_DEVICE(state, key) {
+    delete state.devices[key]
   },
   UPDATE_NEW_DEVICE(state, information) {
     state.newDevice = Object.assign(state.newDevice, information)
-  }
+  },
 }
 
 export default {

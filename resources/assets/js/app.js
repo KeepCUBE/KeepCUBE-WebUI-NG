@@ -1,5 +1,6 @@
 
 require('./bootstrap')
+require('../../../vendor/bower_dl/timeliner/timeliner')
 
 import router from './router'
 import store from './store'

@@ -1,22 +1,22 @@
-const data = require('./devices.mock')
-const LATENCY = 16
-
 export function getAllDevices (cb) {
   Vue.http.get('devices').then(response => {
-    console.log(response)
+    cb(response.json().data)
   }, response => {
-    console.log(response.status)
+    console.log(response)
   })
-
-
-  setTimeout(() => {
-    cb(data)
-  }, LATENCY)
 }
 
-export function postNewDevice (device) {
+export function postNewDevice (device, cb) {
   Vue.http.post('devices', device).then(response => {
-    console.log(response)
+    cb(device)
+  }, response => {
+    console.log(response.body)
+  })
+}
+
+export function deleteDevice (device, cb) {
+  Vue.http.delete('devices', device.id).then(response => {
+    cb(id)
   }, response => {
     console.log(response)
   })

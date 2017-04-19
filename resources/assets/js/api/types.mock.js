@@ -1,13 +1,6 @@
 module.exports = [
   {
-    id: 10,
-    title: 'HUE',
-    devices: [
-      34,
-    ],
+    name: 'Switch',
+    dirname: 'switch',
   },
-  {
-    id: 14,
-    title: 'Stepper Motor',
-  }
 ]

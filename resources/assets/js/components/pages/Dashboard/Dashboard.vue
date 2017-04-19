@@ -6,21 +6,18 @@
                 <i class="mdl-icon-toggle__label material-icons">build</i>
             </label>
         </div>
-
         <div class="mdl-grid">
-            <div v-for="(homeCard, index) in homeCards" class="mdl-cell mdl-cell--4-col mdl-card">
-                <div class="mdl-card__title">{{ homeCard.title }}</div>
-                <div class="mdl-card__title">{{ homeCard.time }}</div>
-
-                <div v-if="editMode" class="mdl-card__operation-column">
-                    <button @click="removeHomeCard(index)" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                        <i class="material-icons">clear</i>
-                    </button>
-                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                        <i class="material-icons">settings</i>
-                    </button>
-                </div>
+            <div class="sense-item mdl-cell mdl-cell--4-col">
+                <i class="material-icons">whatshot</i>
+                <span>22 °C</span>
             </div>
+            <div class="sense-item mdl-cell mdl-cell--4-col">
+                <i class="material-icons">spa</i>
+                <span>70 %</span>
+            </div>
+        </div>
+        <div class="mdl-grid">
+            <card v-for="(card, index) in cards" :card="card"></card>
             <div v-if="editMode" @click="addHomeCard" class="mdl-cell mdl-cell--4-col mdl-card mdl-card--add">
                 <i class="material-icons">add</i>
             </div>
@@ -34,49 +31,43 @@
     flex-direction: column;
     height:100%;
 }
-.mdl-card {
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-around;
-}
-.mdl-card--add {
+.sense-item {
+    display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    flex-direction:column;
 }
-.mdl-card--add > i {
-    cursor: inherit;
-    font-size: 8rem;
-    color: #FFF;
-    user-select: none;
-    -webkit-user-select: none;
+.sense-item * {
+    padding: .1em;
 }
-.mdl-card__operation-column {
-    display: flex;
-    flex-direction: column;
+.sense-item i {
+    font-size: 10em;
 }
+.sense-item span {
+    font-size: 4em;
+}
+
 
 </style>
 
 <script>
 
+    import Card from './Card.vue'
+
     export default{
         data() {
             return {
-                editMode: true,
-                homeCards: [
-                    {
-                        title: "text",
-                    }
-                ],
+                editMode: false,
             }
         },
+      computed: {
+        cards() {
+          return this.$store.getters.allCards;
+        }
+      },
         methods: {
             addHomeCard: function () {
-                this.homeCards.push({
-                    title: "Hello! You've just added me! Let's be friends :3",
-                    time: Date.now()
-                });
+              this.$store.dispatch('addCard')
             },
             removeHomeCard: function (index) {
                 this.homeCards.splice(index,1);
@@ -84,6 +75,7 @@
             }
         },
         components:{
+          Card
         }
     }
 </script>
