@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use KC\Http\Controllers\Api\Controller;
 use KC\Models\Command\Command;
 use KC\Services\CommandServices\CommandSender;
+use KC\Models\Type\Type;
 
 class CommandController extends Controller
 {
