@@ -10,6 +10,8 @@ use Spatie\Fractal\Fractal;
 
 class DeviceFetcher {
     private $device;
+    private $fractal;
+    
     public function __construct(Device $device, Fractal $fractal) {
         $this->device = $device;
         $this->fractal = $fractal;
@@ -18,7 +20,7 @@ class DeviceFetcher {
         try {
             $device = $this->device->findOrFail($id);
             return $this->fractal->item($device, new DeviceTransformer);
-        } catch(\Exception $e) {
+        } catch(ModelNotFoundException $e) {
             throw new NotFoundHttpException("Device with id {$id} not found");
         }
     }

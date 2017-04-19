@@ -2,22 +2,20 @@
 
 namespace KC\Http\Controllers\Api\V1;
 
-use KC\Http\Requests\DeviceRequests\DeviceRequest;
-use KC\Models\Device\Device;
 use Illuminate\Http\Request;
-use KC\Services\DeviceServices\DeviceFetcher;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use KC\Http\Controllers\Api\Controller;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use KC\Services\RoomServices\RoomFetcher;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use KC\Models\Room\Room;
 
-class DeviceController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DeviceFetcher $fetcher)
+    public function index(RoomFetcher $fetcher)
     {
         return $fetcher->paginate();
     }
@@ -28,11 +26,11 @@ class DeviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeviceRequest $request)
+    public function store(Request $request)
     {
-        $device = Device::create($request->all());
+        $room = Room::create($request->all());
 
-        return $this->successResponse("Device {$device->name} created");
+        return $this->successResponse("Room {$room->name} created");
     }
 
     /**
@@ -41,7 +39,7 @@ class DeviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(DeviceFetcher $fetcher, $id)
+    public function show(RoomFetcher $fetcher, $id)
     {
         return $fetcher->find($id);
     }
@@ -56,11 +54,11 @@ class DeviceController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $device = Device::findOrFail($id);
-            $device->update($request->all());
-            return $this->successResponse("Device {$device->name} updated.");
+            $room = Room::findOrFail($id);
+            $room->update($request->all());
+            return $this->successResponse("Room {$room->name} updated.");
         } catch (ModelNotFoundException $e) {
-            throw new NotFoundHttpException('Device not found');
+            throw new NotFoundHttpException('Room not found');
         }
     }
 
@@ -72,7 +70,7 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        $device = Device::destroy($id);
-        return $this->successResponse("Device $id successfully destroyed");
+        $room = Room::destroy($id);
+        return $this->successResponse("Room $id successfully destroyed");
     }
 }
