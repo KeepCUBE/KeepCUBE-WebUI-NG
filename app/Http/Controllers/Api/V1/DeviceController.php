@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use KC\Services\DeviceServices\DeviceFetcher;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use KC\Http\Controllers\Api\Controller;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DeviceController extends Controller
 {
@@ -59,7 +58,7 @@ class DeviceController extends Controller
             $device = Device::findOrFail($id);
             $device->update($request->all());
             return $this->successResponse("Device {$device->name} updated.");
-        } catch (ModelNotFoundException $e) {
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             throw new NotFoundHttpException('Device not found');
         }
     }
