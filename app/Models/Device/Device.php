@@ -7,11 +7,12 @@ use KC\Models\Type\Type;
 use KC\Models\Command\Command;
 use KC\Models\Group\Group;
 use Illuminate\Database\Eloquent\Model;
+use KC\Models\Room\Room;
 
 class Device extends Model
 {
     protected $fillable = [
-        'name', 'type_id'
+        'name', 'type_id', 'room_id'
     ];
     public function type() {
         return $this->belongsTo(Type::class);
@@ -21,5 +22,8 @@ class Device extends Model
     }
     public function groups() {
         return $this->belongsToMany(Group::class);
+    }
+    public function room() {
+        return $this->belongsTo(Room::class);
     }
 }
