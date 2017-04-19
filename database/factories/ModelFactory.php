@@ -1,13 +1,9 @@
 <?php
-
-use KC\Models\{
-    Room\Room,
-    User\User,
-    Type\Type,
-    Command\Command,
-    Route\Route,
-    Device\Device
-};
+use KC\Models\User\User;
+use KC\Models\Device\Device;
+use KC\Models\Type\Type;
+use KC\Models\Command\Command;
+use KC\Models\Route\Route;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -42,17 +38,10 @@ $factory->define(Type::class, function (Faker\Generator $faker) {
         'route_id' => factory(Route::class)->create()->id
     ];
 });
-$factory->define(Room::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->word,
-        'description' => $faker->text
-    ];
-});
 $factory->define(Device::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'type_id' => factory(Type::class)->create()->id,
-        'room_id' => factory(Room::class)->create()->name
+        'type_id' => factory(Type::class)->create()->id
     ];
 });
 
@@ -63,11 +52,13 @@ $factory->define(Command::class, function (Faker\Generator $faker) {
         'command_scheme' => [
                 'name' => 'SLP',
                 'values' => [
-                    'L' => 1,
-                    'C' => [
-                        '#ff0022'
+                    'L' => 25,
+                    'P' => [
+                        '#ff0022',
+                        '#ff0033'
                     ],
-                    'T' => 1000
+                    'T' => 0.4,
+                    'D' => 10
                 ]
         ]
     ];
