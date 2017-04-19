@@ -13,8 +13,8 @@
         <h3>Stock</h3>
         <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
             <tbody>
-            <tr v-for="stock in stocks" @click="select">
-                <td class="mdl-data-table__cell--non-numeric" :data-id="stock.id" >{{ stock.name }}</td>
+            <tr v-for="(stock, index) in stocks" @click="select">
+                <td class="mdl-data-table__cell--non-numeric" :data-id="index" >{{ stock.name }}</td>
                 <td></td>
             </tr>
             </tbody>
@@ -54,6 +54,7 @@
       select(e){
         const val = Number(e.target.dataset.id)
         this.$store.dispatch('newDeviceSetAttr', {attr: 'type_id', val})
+        console.log(val)
         this.nextStep()
       }
     }

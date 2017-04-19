@@ -23,7 +23,7 @@ const actions = {
     commit('UPDATE_NEW_DEVICE', { [attr]: val})
   },
   newDeviceSplash({ commit }) {
-    if(state.newDevice.name && state.newDevice.type_id) {
+    if(state.newDevice.name && (state.newDevice.type_id || state.newDevice.type_id == 0)) {
       api.postNewDevice(state.newDevice, newDevice => {
         commit('ADD_DEVICE', newDevice)
       })
@@ -45,6 +45,7 @@ const mutations = {
     state.devices = reindexedDevices
   },
   ADD_DEVICE(state, device) {
+    //TODO API should return device id
     state.devices[device.id] = (device)
   },
   REMOVE_DEVICE(state, key) {

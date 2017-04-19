@@ -16,11 +16,6 @@ Vue.directive('mdl', {
     componentHandler.upgradeElement(el)
   }
 })
-Vue.directive('timeliner', {
-  bind: function (el) {
-    new Timeliner(el)
-  }
-})
 
 Vue.config.devtools = true
 Vue.config.silent = false
