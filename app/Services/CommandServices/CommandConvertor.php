@@ -7,7 +7,7 @@ use KC\Models\Route\Route;
 class CommandConvertor {
     public function convert(Command $command, Route $route) {
         $code = '';
-        foreach($command as $key => $value) {
+        foreach($command->command_scheme['values'] as $key => $value) {
             $value = $this->formatValue($value);
             $code .= strtoupper($key).$value;
         }
@@ -15,11 +15,11 @@ class CommandConvertor {
     }
     public function convertFromArray($command, Route $route) {
         $code = '';
-        foreach ($command as $key => $value) {
+        foreach ($command['values'] as $key => $value) {
             $value = $this->formatValue($value);
             $code .= strtoupper($key).$value;
         }
-        return $this->packCommand($route, $command['name'].$command['values']);
+        return $this->packCommand($route, $command['name'].$code);
     }
     public function packCommand(Route $route, $code) {
         $header = '';
@@ -33,7 +33,7 @@ class CommandConvertor {
             case is_string($value):
                 return "&{$this->sanitizeString($value)}&";
             case is_array($value):
-                return '&'.implode(',',$this->sanitizeString($value)).'&';
+                return '&'.implode(',',array_map([$this, 'sanitizeString'], $value)).'&';
             case is_bool($value):
                 return (int)$value;
             default:
@@ -41,6 +41,6 @@ class CommandConvertor {
         }
     }
     private function sanitizeString($value) {
-        return str_replace(["#",";"],'',$value);
+        return strtolower(str_replace(["#",";"],'',$value));
     }
 }

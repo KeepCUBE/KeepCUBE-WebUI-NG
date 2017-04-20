@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use KC\Models\Command\Command;
+use KC\Models\Type\Type;
 
 class CommandExecuteTest extends TestCase
 {
@@ -18,5 +19,25 @@ class CommandExecuteTest extends TestCase
         $parent->children()->create(['name' => 'NRF', 'code' => 'NRF']);
         $response = $this->post(route('commands.execute', [$command->id]));
         $response->seeStatusCode(200);
+    }
+    public function testCommandSlain() {
+        $type  = factory(Type::class)->create();
+        $response = $this->post(route('commands.slain', [
+            'type_id' => $type->id,
+            'command_scheme' => [
+                'name' => 'SLP',
+                'values' => [
+                    'L' => 1,
+                    'C' => [
+                        '#F00FF2',
+                        '#F02F11'
+                    ],
+                    'T' => [
+                        1000
+                    ]
+                ]
+            ]
+        ]));
+        dump($response);
     }
 }
