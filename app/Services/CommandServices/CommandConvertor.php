@@ -7,11 +7,19 @@ use KC\Models\Route\Route;
 class CommandConvertor {
     public function convert(Command $command, Route $route) {
         $code = '';
-        foreach($command->command_scheme['values'] as $key => $value) {
+        foreach($command as $key => $value) {
             $value = $this->formatValue($value);
             $code .= strtoupper($key).$value;
         }
         return $this->packCommand($route, $command->command_scheme['name'].$code);
+    }
+    public function convertFromArray($command, Route $route) {
+        $code = '';
+        foreach ($command as $key => $value) {
+            $value = $this->formatValue($value);
+            $code .= strtoupper($key).$value;
+        }
+        return $this->packCommand($route, $command['name'].$command['values']);
     }
     public function packCommand(Route $route, $code) {
         $header = '';

@@ -20,6 +20,10 @@ class CommandSender {
         $convertedCommand = $this->convertor->convert($command, $route);
         $this->publish($convertedCommand);
     }
+    public function sendFromArray($command, Route $route) {
+        $convertedCommand = $this->convertor->convertFromArray($command, $route);
+        $this->publish($convertedCommand);
+    }
     private function publish($data) {
         $this->redis->publish($this->channel, $data);
     }
