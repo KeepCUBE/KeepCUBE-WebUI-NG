@@ -29,6 +29,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
 $factory->define(Route::class, function (Faker\Generator $faker) {
     return [
         'code' => strtoupper($faker->word),
@@ -52,7 +53,7 @@ $factory->define(Device::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'type_id' => factory(Type::class)->create()->id,
-        'room_id' => factory(Room::class)->create()->name
+        'room_id' => factory(Room::class)->create()->id
     ];
 });
 
