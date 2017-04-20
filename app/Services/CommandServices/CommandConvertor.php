@@ -25,7 +25,7 @@ class CommandConvertor {
             case is_string($value):
                 return "&{$this->sanitizeString($value)}&";
             case is_array($value):
-                return '&'.implode('',$this->sanitizeString($value)).'&';
+                return '&'.implode(',',$this->sanitizeString($value)).'&';
             case is_bool($value):
                 return (int)$value;
             default:

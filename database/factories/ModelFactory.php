@@ -66,9 +66,13 @@ $factory->define(Command::class, function (Faker\Generator $faker) {
                 'values' => [
                     'L' => 1,
                     'C' => [
-                        '#ff0022'
+                        '#ff0022',
+                        '#ff0033'
                     ],
-                    'T' => 1000
+                    'T' => [
+                        1000, 
+                        1000
+                    ]
                 ]
         ]
     ];
