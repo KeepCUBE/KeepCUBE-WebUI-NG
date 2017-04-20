@@ -38,6 +38,7 @@ class CommandExecuteTest extends TestCase
                 ]
             ]
         ]));
-        dump($response);
+        $response->seeStatusCode(200);
+        $response->seeJson(['ok' => true]);
     }
 }
