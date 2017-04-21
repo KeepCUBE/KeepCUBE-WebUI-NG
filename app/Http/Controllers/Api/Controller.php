@@ -5,10 +5,12 @@ use KC\Http\Controllers\Controller as BaseController;
 
 abstract class Controller extends BaseController
 {
-  protected function successResponse($message, $code=200) {
-    return response()->json([
+  protected function response($message, $data = [], $code=200) {
+    $payload = array_merge([
       'ok' => true,
       'message' => $message
-    ], $code);
+    ], $data);
+
+    return response()->json($payload, $code);
   }
 }
