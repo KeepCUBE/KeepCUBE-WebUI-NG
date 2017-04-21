@@ -13,14 +13,6 @@ class CommandConvertor {
         }
         return $this->packCommand($route, $command->command_scheme['name'].$code);
     }
-    public function convertFromArray($command, Route $route) {
-        $code = '';
-        foreach ($command['values'] as $key => $value) {
-            $value = $this->formatValue($value);
-            $code .= strtoupper($key).$value;
-        }
-        return $this->packCommand($route, $command['name'].$code);
-    }
     public function packCommand(Route $route, $code) {
         $header = '';
         foreach($route->getDescendantsAndSelf() as $child) {
