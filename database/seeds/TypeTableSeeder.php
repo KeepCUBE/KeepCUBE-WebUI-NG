@@ -13,6 +13,13 @@ class TypeTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Type::class, 10)->create();
+        DB::table('types')->insert([
+            'name' => 'Switch',
+            'route_id' => '1',
+        ]);
+        DB::table('types')->insert([
+            'name' => 'KC LED',
+            'route_id' => '1',
+        ]);
     }
 }

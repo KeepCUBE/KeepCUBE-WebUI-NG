@@ -12,6 +12,14 @@ class DeviceTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Device::class, 10)->create();
+        DB::table('devices')->insert([
+            'name' => 'Lustr obývák',
+            'type_id' => '1',
+        ]);
+        DB::table('devices')->insert([
+            'name' => 'Led pásek kuchyň',
+            'type_id' => '2',
+
+        ]);
     }
 }
