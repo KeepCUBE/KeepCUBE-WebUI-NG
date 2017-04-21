@@ -17,7 +17,7 @@ class DeviceTableSeeder extends Seeder
             'type_id' => '1',
         ]);
         DB::table('devices')->insert([
-            'name' => 'Led pásek kuchyň',
+            'name' => 'Led kuchyň',
             'type_id' => '2',
 
         ]);
