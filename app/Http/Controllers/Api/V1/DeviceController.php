@@ -32,7 +32,7 @@ class DeviceController extends Controller
     {
         $device = Device::create($request->all());
 
-        return $this->successResponse("Device {$device->name} created");
+        return $this->response("Device {$device->name} created", ['id' => $device->id]);
     }
 
     /**
@@ -58,7 +58,7 @@ class DeviceController extends Controller
         try {
             $device = Device::findOrFail($id);
             $device->update($request->all());
-            return $this->successResponse("Device {$device->name} updated.");
+            return $this->response("Device {$device->name} updated.");
         } catch (ModelNotFoundException $e) {
             throw new NotFoundHttpException('Device not found');
         }
@@ -73,6 +73,6 @@ class DeviceController extends Controller
     public function destroy($id)
     {
         $device = Device::destroy($id);
-        return $this->successResponse("Device $id successfully destroyed");
+        return $this->response("Device $id successfully destroyed");
     }
 }

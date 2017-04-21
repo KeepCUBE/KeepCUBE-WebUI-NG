@@ -15,17 +15,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        return DeviceType::paginate(15);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Type::paginate(15);
     }
 
     /**
@@ -36,7 +26,9 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        return DeviceType::create($request->all());
+        $type = Type::create($request->all());
+
+        return $this->response("Type {$type->name} created", ['id' => $type->id]);
     }
 
     /**
@@ -70,7 +62,7 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return DeviceType::update($request->all());
+        return Type::update($request->all());
     }
 
     /**

@@ -30,7 +30,7 @@ class CommandController extends Controller
     {
         $command = Command::create($request->all());
 
-        return $this->successResponse("Command {$command->name} created.");
+        return $this->response("Command {$command->name} created.", ['id' => $command->id]);
     }
 
     /**
@@ -65,7 +65,7 @@ class CommandController extends Controller
     public function destroy($id)
     {
         if(Command::destroy($id)) {
-            return $this->successResponse("Command destroyed successfully");
+            return $this->response("Command destroyed successfully");
         }
     }
     /**
@@ -77,13 +77,13 @@ class CommandController extends Controller
         $route = $command->type->route;
         $sender->send($command, $route);
 
-        return $this->successResponse("Command executed successfuly");
+        return $this->response("Command executed successfuly");
     }
     public function slain(Request $request, CommandSender $sender, Type $type) {
         $command = (new Command)->fill($request->all());
         $type = $type->find($request->input('type_id'));
         $sender->send($command, $type->route);
 
-        return $this->successResponse("Command slained successfuly");
+        return $this->response("Command slained successfuly");
     }
 }

@@ -37,7 +37,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $request, UserCreator $userCreator)
     {
         $user = $userCreator->store($request->all());
-        return $this->successResponse("User {$user->name} created.");
+        return $this->response("User {$user->name} created.");
     }
     /**
      * Display the specified User.
@@ -65,7 +65,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request,UserUpdater $userUpdater, $id)
     {
         $user = $userUpdater->update($id, $request->all());
-        return $this->successResponse("User {$id} updated.");
+        return $this->response("User {$id} updated.");
     }
 
     /**
@@ -77,6 +77,6 @@ class UserController extends Controller
     public function destroy(UserDestroyer $userDestroy, $id)
     {
         $user = $userDestroy->delete($id);
-        return $this->successResponse("User {$id} deleted.");
+        return $this->response("User {$id} deleted.");
     }
 }

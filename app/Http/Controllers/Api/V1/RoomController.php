@@ -30,7 +30,7 @@ class RoomController extends Controller
     {
         $room = Room::create($request->all());
 
-        return $this->successResponse("Room {$room->name} created");
+        return $this->response("Room {$room->name} created", ['id' => $room->id]);
     }
 
     /**
@@ -56,7 +56,7 @@ class RoomController extends Controller
         try {
             $room = Room::findOrFail($id);
             $room->update($request->all());
-            return $this->successResponse("Room {$room->name} updated.");
+            return $this->response("Room {$room->name} updated.");
         } catch (ModelNotFoundException $e) {
             throw new NotFoundHttpException('Room not found');
         }
@@ -71,6 +71,6 @@ class RoomController extends Controller
     public function destroy($id)
     {
         $room = Room::destroy($id);
-        return $this->successResponse("Room $id successfully destroyed");
+        return $this->response("Room $id successfully destroyed");
     }
 }
