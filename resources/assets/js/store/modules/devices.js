@@ -10,7 +10,8 @@ const state = {
 
 const getters = {
   allDevices: state => state.devices,
-  newDeviceData: state => state.newDevice
+  newDeviceData: state => state.newDevice,
+  device: (state, getters) => (id) => { return state.devices[id] }
 }
 
 const actions = {
@@ -30,7 +31,7 @@ const actions = {
     }
   },
   removeDevice({ commit }, key) {
-    api.deleteDevice(state.devices[key], key => {
+    api.deleteDevice(key, key => {
       commit('REMOVE_DEVICE', key)
     })
   }

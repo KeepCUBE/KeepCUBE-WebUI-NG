@@ -2,7 +2,7 @@
     <div id="accessories">
         <transition name="modal">
             <new-device v-if="visibleModal == 'new'"></new-device>
-            <device-modal v-bind:device="openedDevice" v-if="visibleModal == 'detail'"></device-modal>
+            <device-modal v-bind:deviceId="openedDeviceId" v-if="visibleModal == 'detail'"></device-modal>
         </transition>
         <div class="operation-bar">
             <mode-button v-for="(value, mode) in 3" v-on:click.native="changeMode(mode)" v-bind:mode="mode"></mode-button>
@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="device in devices" @click="showDetail(device)">
+                        <tr v-for="(device, index) in devices" @click="showDetail(index)">
                             <td class="mdl-data-table__cell--non-numeric">{{ device.name }}</td>
                             <td>{{ findTypeById(device.type_id).name }}</td>
                             <td>
@@ -62,7 +62,7 @@
             return{
               visibleModal: 0,
               mode: 2, //mode of view [0 = types, 1 = groups, 2 = all]
-              openedDevice: null,
+              openedDeviceId: null,
             }
         },
         methods: {
@@ -96,9 +96,9 @@
 
                 return filteredGroups
             },
-            showDetail(device) {
+            showDetail(deviceId) {
               this.visibleModal = "detail"
-              this.openedDevice = device
+              this.openedDeviceId = deviceId
             },
             newDevice() {
                 this.visibleModal = "new"
@@ -135,6 +135,6 @@
             groups() {
                 return this.$store.getters.allGroups
             }
-        }
+        },
     }
 </script>

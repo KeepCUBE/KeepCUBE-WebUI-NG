@@ -6941,7 +6941,7 @@ input.mdl-button[type="submit"] {
     .modal-mask .modal-container h2 {
       font-size: 3.8rem;
       margin-top: 0; }
-    .modal-mask .modal-container .step-desc {
+    .modal-mask .modal-container .desc {
       color: rgb(82,182,236);
       font-size: 1.4rem; }
 

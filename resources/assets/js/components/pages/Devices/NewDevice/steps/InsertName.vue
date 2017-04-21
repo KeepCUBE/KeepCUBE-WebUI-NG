@@ -7,7 +7,7 @@
             </div>
         </div>
         <button @click="save" class="mdl-button mdl-js-button mdl-button--colored">
-            Uložit
+            Save
         </button>
     </div>
 </template>

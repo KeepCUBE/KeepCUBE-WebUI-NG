@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="mdl-grid mdl-grid--no-spacing">
-            <div class="step-desc mdl-cell">Please select a device type which you want to add.</div>
+            <div class="desc mdl-cell">Please select a device type which you want to add.</div>
 <!--
             <div class="mdl-textfield mdl-js-textfield">
                 <input class="mdl-textfield__input" type="text" id="sample1">

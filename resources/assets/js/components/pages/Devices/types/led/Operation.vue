@@ -4,7 +4,10 @@
             <!--<div id="timeliner" v-timeliner ></div>-->
             <input type="color" v-model="ledColor">
             <div :style="{backgroundColor: ledColor}" class="led"></div>
-            <button @click="send" class="mdl-button">Send</button>
+        </div>
+        <div id="power">
+            <button @click="on" class="mdl-button">On</button>
+            <button @click="off" class="mdl-button">Off</button>
         </div>
     </div>
 </template>
@@ -15,13 +18,16 @@
         flex-direction: column;
         justify-content: space-around;
     }
-    #operations > div {
+    #operations > #ledboard, #power {
         width: 100%;
         height: 16em;
         display:flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+    }
+    #operations > #power {
+        justify-content: center;
     }
     .led {
         width: 4em;
@@ -33,7 +39,7 @@
 </style>
 <script>
 
-    import * as api from '../../../../../api/types/switch/switch'
+    import * as api from '../../../../../api/types/led/led'
 
     export default{
       props: ['deviceId'],
@@ -73,7 +79,11 @@
         }*/
       },
       methods: {
-        send(){
+        off() {
+          console.log('Calling API')
+          api.sendLedConf({color: '#000000'})
+        },
+        on(){
           console.log('Calling API')
           api.sendLedConf({color: this.ledColor})
         },

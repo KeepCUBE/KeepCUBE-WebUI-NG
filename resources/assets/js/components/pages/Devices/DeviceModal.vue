@@ -1,10 +1,12 @@
 <template>
     <modal :title="'Accessory Modal'">
 
+        <h3>{{ device.name }}</h3>
+
         <components :deviceId="device.id" :is="typeOperations"></components>
 
         <button @click="remove" class="mdl-button mdl-js-button mdl-button--colored">
-            Smazat
+            Remove Device
         </button>
 
     </modal>
@@ -17,25 +19,27 @@
   import LED from './types/led/Operation.vue'
 
   export default {
-    props: ['device'],
+    props: ['deviceId'],
     data() {
       return {
-        types: {'switch': Switch, 'led': LED}
+        types: [Switch, LED]
       }
     },
     components: {
       Modal,
     },
     computed: {
+      device() {
+        return this.$store.getters.device(this.deviceId)
+      },
       typeOperations() {
-        return this.types['led']
-        //later
-        //return this.types[this.device.type]
+        return this.types[this.device.type_id - 1]
       }
     },
     methods: {
       remove() {
-        this.$store.dispatch('removeDevice', 1 )
+        this.$store.dispatch('removeDevice', this.deviceId )
+        this.$bus.emit('modal-close')
       },
     }
   }

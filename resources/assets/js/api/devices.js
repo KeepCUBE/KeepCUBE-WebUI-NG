@@ -14,9 +14,10 @@ export function postNewDevice (device, cb) {
   })
 }
 
-export function deleteDevice (device, cb) {
-  Vue.http.delete('devices', device.id).then(response => {
+export function deleteDevice (id, cb) {
+  Vue.http.delete(`devices/${id}`).then(response => {
     cb(id)
+    console.log('device deleted')
   }, response => {
     console.log(response)
   })
