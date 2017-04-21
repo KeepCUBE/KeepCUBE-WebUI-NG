@@ -17,7 +17,7 @@ Vue.http.interceptors.push((request, next) => {
   request.headers['Accept'] = 'application/json'
   next()
 })
-Vue.http.options.root = '//localhost:8000/keepi/v1'
+Vue.http.options.root = '/keepi/v1'
 
 
 /**
