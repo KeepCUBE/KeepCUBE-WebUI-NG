@@ -15,6 +15,7 @@ class RoomTransformer extends TransformerAbstract
     public function transform(Room $room)
     {
         return [
+            'id' => (int) $room->id,
             'name' => $room->name,
             'description' => $room->description
         ];
