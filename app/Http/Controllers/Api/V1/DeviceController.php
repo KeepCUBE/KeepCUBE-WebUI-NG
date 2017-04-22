@@ -32,7 +32,7 @@ class DeviceController extends Controller
     {
         $device = Device::create($request->all());
 
-        return $this->response("Device {$device->name} created", [$device->toArray()]);
+        return $this->response("Device {$device->name} created", $device->toArray());
     }
 
     /**
