@@ -23,9 +23,10 @@
                 </div>
             </template>
             <template v-if="mode == '2'">
-                <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+                <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col devices-list">
                     <thead>
                         <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Remove</th>
                             <th class="mdl-data-table__cell--non-numeric">Name</th>
                             <th>Type</th>
                             <th>Groups</th>
@@ -33,8 +34,13 @@
                     </thead>
                     <tbody>
                         <tr v-for="(device, index) in devices" @click="showDetail(index)">
+                            <td class="mdl-data-table__cell--non-numeric">
+                                <div @click="remove(index)" class="mdl-button mdl-js-button ">
+                                    Remove
+                                </div>
+                            </td>
                             <td class="mdl-data-table__cell--non-numeric">{{ device.name }}</td>
-                            <td>{{ findTypeById(device.type_id).name }}</td>
+                            <td>{{ types[device.type_id].name }}</td>
                             <td>
                                 <span v-for="group in findGroupsByIds(device.groups)">{{ group.name }}, </span>
                             </td>
@@ -53,6 +59,12 @@
     </div>
 </template>
 
+<style>
+    .devices-list th:first-child {
+        width: 20px;
+    }
+</style>
+
 <script>
     import DeviceModal from './DeviceModal.vue'
     import ModeButton from './ModeButton.vue'
@@ -70,6 +82,7 @@
                 this.mode = mode
             },
             findTypeById(id) {
+              //TODO: fucking delete this method and make it logical
                 let filteredType = this.types.filter((type) => {
                   return type.id == id
                 });
@@ -105,7 +118,10 @@
             },
             closeModal() {
                 this.visibleModal = false
-            }
+            },
+          remove(deviceId) {
+            this.$store.dispatch('removeDevice', deviceId )
+          },
         },
         components: {
           ModeButton,

@@ -3,11 +3,7 @@
 
         <h3>{{ device.name }}</h3>
 
-        <components :deviceId="device.id" :is="typeOperations"></components>
-
-        <button @click="remove" class="mdl-button mdl-js-button mdl-button--colored">
-            Remove Device
-        </button>
+        <components :deviceId="deviceId" :is="typeOperations"></components>
 
     </modal>
 </template>
@@ -37,10 +33,6 @@
       }
     },
     methods: {
-      remove() {
-        this.$store.dispatch('removeDevice', this.deviceId )
-        this.$bus.emit('modal-close')
-      },
     }
   }
 </script>

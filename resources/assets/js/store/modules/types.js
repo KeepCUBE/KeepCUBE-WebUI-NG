@@ -18,7 +18,11 @@ const actions = {
 
 const mutations = {
   setTypes(state, {types}) {
-    state.types = types
+    let reindexedTypes = {}
+    types.forEach((item) => {
+      reindexedTypes[item.id] = item
+    })
+    state.types = reindexedTypes
   }
 }
 
