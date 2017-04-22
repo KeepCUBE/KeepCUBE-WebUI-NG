@@ -25,7 +25,7 @@ class RoomFetcher {
             $room = $this->room->findOrFail($id);
             return $this->fractal->item($room, new RoomTransformer);
         } catch (ModelNotFoundException $e) {
-            throw new NotFoundHttpException("Device with id {$id} not found");
+            throw new NotFoundHttpException("Room with id {$id} not found");
         }
     }
     public function paginate(string $includes = null, $perPage = 15) {
