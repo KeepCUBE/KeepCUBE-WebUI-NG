@@ -9,7 +9,7 @@ abstract class Controller extends BaseController
     $payload = array_merge([
       'ok' => true,
       'message' => $message
-    ], $data);
+    ], ['data' => $data]);
 
     return response()->json($payload, $code);
   }
