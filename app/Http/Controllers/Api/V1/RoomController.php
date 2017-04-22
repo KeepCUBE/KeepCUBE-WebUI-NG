@@ -30,7 +30,7 @@ class RoomController extends Controller
     {
         $room = Room::create($request->all());
 
-        return $this->response("Room {$room->name} created", ['id' => $room->id]);
+        return $this->response("Room {$room->name} created", $room->toArray());
     }
 
     /**
