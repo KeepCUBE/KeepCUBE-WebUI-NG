@@ -10,6 +10,7 @@ class DeviceTransformer extends TransformerAbstract {
             'id' => (int) $device->id,
             'name' => $device->name,
             'type_id' => $device->type_id,
+            'room_id' => $device->room_id,
         ];
     }
 }
