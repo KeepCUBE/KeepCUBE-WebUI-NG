@@ -8,7 +8,8 @@ export function getAllDevices (cb) {
 
 export function postNewDevice (device, cb) {
   Vue.http.post('devices', device).then(response => {
-    cb(device)
+    console.log(response.data.data)
+    cb(response.data.data)
   }, response => {
     console.log(response.body)
   })

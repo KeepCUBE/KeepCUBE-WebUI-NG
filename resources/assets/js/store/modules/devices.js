@@ -16,7 +16,7 @@ const getters = {
 
 const actions = {
   getDevicesFromApi({ commit }) {
-    api.getAllDevices(devices => {
+    api.getAllDevices((devices) => {
       commit('SET_DEVICES', {devices})
     })
   },
@@ -46,7 +46,6 @@ const mutations = {
     state.devices = reindexedDevices
   },
   ADD_DEVICE(state, device) {
-    //TODO API should return device id
     state.devices[device.id] = (device)
   },
   REMOVE_DEVICE(state, key) {
