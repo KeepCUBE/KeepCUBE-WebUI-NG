@@ -50,13 +50,15 @@
     background-color: $button-hover-color;
   }
 
-  &:focus:not(:active) {
+/*  &:focus:not(:active) {
     background-color: $button-focus-color;
-  }
+  }*/
 
+  /*
   &:active {
     background-color: $button-active-color;
   }
+  */
 
   &.mdl-button--colored {
     color: $button-primary-color-alt;

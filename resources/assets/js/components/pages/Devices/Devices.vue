@@ -33,11 +33,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(device, index) in devices" @click="showDetail(index)">
+                        <tr v-for="(device, index) in devices" @click="showDetail(index, $event)">
                             <td class="mdl-data-table__cell--non-numeric">
-                                <div @click="remove(index)" class="mdl-button mdl-js-button ">
+                                <button @click="remove(index)" class="mdl-button mdl-js-button ">
                                     Remove
-                                </div>
+                                </button>
                             </td>
                             <td class="mdl-data-table__cell--non-numeric">{{ device.name }}</td>
                             <td>{{ types[device.type_id].name }}</td>
@@ -109,7 +109,11 @@
 
                 return filteredGroups
             },
-            showDetail(deviceId) {
+            showDetail(deviceId, event) {
+              if(event.target.tagName.toLowerCase() === 'button') {
+                return
+              }
+
               this.visibleModal = "detail"
               this.openedDeviceId = deviceId
             },
@@ -129,13 +133,6 @@
           NewDevice
         },
         created() {
-          if(this.$store.getters.allDevices.length == 0) {
-              this.$store.dispatch('getDevicesFromApi')
-              this.$store.dispatch('getGroupsFromApi')
-              this.$store.dispatch('getTypesFromApi')
-            /*setTimeout(console.log(this.devices), 5000)*/
-
-          }
           this.$bus.on('modal-close', this.closeModal)
         },
         destroyed() {

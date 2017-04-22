@@ -1,5 +1,5 @@
 <template>
-    <button class="mdl-button mdl-js-button mdl-button--icon" :id="button[mode].cssId" :disabled="button[mode].title == 'Types'">
+    <button class="mdl-button mdl-js-button mdl-button--icon" :id="button[mode].cssId" :disabled="button[mode].title != 'All'">
         <i class="material-icons">{{ button[mode].icon }}</i>
         <div class="mdl-tooltip mdl-tooltip--large" :for="button[mode].cssId">
             {{ button[mode].title }}

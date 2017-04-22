@@ -10,16 +10,14 @@
             'title': "Main Page",
             'link': "/home",
         },
-/*
         {
             'title': "Rooms",
             'link': "/rooms",
         },
-*/
         {
             'title': "Accessories",
             'link': "/accessories",
-        }
+        },
 /*
         {
             'title': "Users",

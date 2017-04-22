@@ -2,8 +2,8 @@
     <div>
         <div class="mdl-grid mdl-grid--no-spacing">
             <div class="mdl-textfield mdl-js-textfield" v-mdl>
-                <input class="mdl-textfield__input"  v-model="name" type="text" id="device_name">
-                <label class="mdl-textfield__label" for="device_name">Name</label>
+                <input class="mdl-textfield__input"  v-model="name" type="text" id="room_name">
+                <label class="mdl-textfield__label" for="room_name">Name</label>
             </div>
         </div>
         <button @click="save" class="mdl-button mdl-js-button mdl-button--colored">
@@ -24,8 +24,8 @@
     },
     methods: {
       save() {
-        if(this.$store.getters.newDeviceData.name) {
-          this.$store.dispatch('newDeviceSplash')
+        if(this.$store.getters.newRoomData.name) {
+          this.$store.dispatch('newRoomSplash')
           this.$bus.emit('modal-close')
         }
       },
@@ -36,10 +36,10 @@
     computed: {
       name: {
         get() {
-          return this.$store.getters.newDeviceData.name
+          return this.$store.getters.newRoomData.name
         },
         set(newValue) {
-          this.$store.dispatch('newDeviceSetAttr', {attr: 'name', val: newValue})
+          this.$store.dispatch('newRoomSetAttr', {attr: 'name', val: newValue})
         }
       }
     },

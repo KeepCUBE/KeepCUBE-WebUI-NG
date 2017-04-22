@@ -1,12 +1,13 @@
 <template>
     <div id="operations">
-        <div id="power" v-if="!sync">
+        <div id="power" v-show="!sync">
             <button @click="on" id="on" class="mdl-button">On</button>
             <button @click="off" id="off" class="mdl-button">Off</button>
         </div>
+        <hr>
         <div id="sync">
-            <button class="mdl-button" @click="sync = !sync">Synchronize</button>
-            <sync v-if="sync"></sync>
+            <button v-show='!sync' class="mdl-button mdl-js-button" @click="sync = !sync">Synchronize</button>
+            <sync @synced="sync = false" v-if="sync"></sync>
         </div>
     </div>
 </template>

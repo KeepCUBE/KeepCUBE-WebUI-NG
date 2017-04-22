@@ -28,7 +28,7 @@ const actions = {
       api.postNewDevice(state.newDevice, newDevice => {
         commit('ADD_DEVICE', newDevice)
       })
-    }
+   }
   },
   removeDevice({ commit }, key) {
     api.deleteDevice(key, key => {
@@ -46,10 +46,11 @@ const mutations = {
     state.devices = reindexedDevices
   },
   ADD_DEVICE(state, device) {
-    state.devices[device.id] = (device)
+    Vue.set(state.devices, device.id, device)
+    state.newDevice = {type_id: null, name: null}
   },
   REMOVE_DEVICE(state, key) {
-    delete state.devices[key]
+    Vue.delete(state.devices, key)
   },
   UPDATE_NEW_DEVICE(state, information) {
     state.newDevice = Object.assign(state.newDevice, information)

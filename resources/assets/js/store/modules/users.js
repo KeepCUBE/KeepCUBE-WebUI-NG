@@ -1,10 +1,22 @@
-const state = {}
+const state = {
+  users: []
+}
 
-const getters = {}
+const getters = {
+  allUsers: state => state.users
+}
 
-const actions = {}
+const actions = {
+  addNewUser({commit}, user) {
+    commit('ADD_USER', user)
+  }
+}
 
-const mutations = {}
+const mutations = {
+  ADD_USER(state, user) {
+    state.users.push(user)
+  }
+}
 
 export default {
   state,

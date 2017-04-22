@@ -27,24 +27,40 @@
     import navigation from './Navigation.vue'
 
     export default{
-        data() {
-            return {
-                modal: false,
-            };
-        },
-        components:{
-            navigation,
-        },
-        computed: {
-            header: function() {
-                return this.$route.name
-            }
-        },
-        created() {
-            this.$bus.on('modal-close', () => {
-                setTimeout(() => {this.modal = false}, 300)
-            });
-            this.$bus.on('modal-open', () => {this.modal = true});
+      data() {
+        return {
+          modal: false,
+        };
+      },
+      components:{
+        navigation,
+      },
+      computed: {
+        header: function() {
+          return this.$route.name
         }
+      },
+      created() {
+        this.$bus.on('modal-close', () => {
+          setTimeout(() => {this.modal = false}, 300)
+        })
+        this.$bus.on('modal-open', () => {this.modal = true});
+      },
+      mounted() {
+        if(this.$store.getters.allDevices.length == 0) {
+          this.$store.dispatch('getDevicesFromApi')
+        }
+/*
+        if(this.$store.getters.allGroups.length == 0) {
+          this.$store.dispatch('getGroupsFromApi')
+        }
+*/
+        if(this.$store.getters.allTypes.length == 0) {
+          this.$store.dispatch('getTypesFromApi')
+        }
+        if(this.$store.getters.allRooms.length == 0) {
+          this.$store.dispatch('getRoomsFromApi')
+        }
+      }
     }
 </script>

@@ -1,7 +1,5 @@
 <template>
-    <modal :title="'Accessory Modal'">
-
-        <h3>{{ device.name }}</h3>
+    <modal :title="device.name">
 
         <components :deviceId="deviceId" :is="typeOperations"></components>
 

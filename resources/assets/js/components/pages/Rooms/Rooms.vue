@@ -1,19 +1,29 @@
 <template>
     <div id="rooms">
+        <transition name="modal">
+            <new-room v-if="visibleModal == 'new'"></new-room>
+            <!--<device-modal v-bind:deviceId="openedDeviceId" v-if="visibleModal == 'detail'"></device-modal>-->
+        </transition>
+
         <div class="mdl-grid mdl-grid--no-spacing">
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-cell mdl-cell--12-col">
+            <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
                 <thead>
                     <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Material</th>
-                        <th>Quantity</th>
-                        <th>Sumtin</th>
+                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                        <th>Number of accessories</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in items">
+                    <tr v-for="item in rooms">
                         <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
                         <td></td>
-                        <td>{{ item.actions }}</td>
+                    </tr>
+                    <tr @click="newRoom()">
+                        <td colspan="10">
+                            <div style="display: flex; justify-content: center">
+                                <i class="material-icons">add</i>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -27,28 +37,36 @@
 
 <script>
 
-    export default{
-        data(){
-            return{
-                header:'Rooms',
-                items: [
-                    {
-                        name: 'Světlo v koupelně',
-                    },
-                    {
-                        name: 'Diody na telce'
-                    },
-                ]
-            }
-        },
-        beforeMount() {
+    import NewRoom from './New/New.vue'
 
-            //this.items[0]['actions'] = 'action'
-            this.items.map(function (item) {
-                return item['actions'] = 'test'
-            })
-        },
-        components:{
+    export default{
+      data(){
+        return{
+          header:'Rooms',
+          visibleModal: ''
         }
+      },
+      components:{
+        NewRoom,
+      },
+      created() {
+        this.$bus.on('modal-close', this.closeModal)
+      },
+      computed: {
+        rooms() {
+          return this.$store.getters.allRooms
+        }
+      },
+      methods: {
+        newRoom() {
+          this.visibleModal = 'new'
+        },
+        closeModal() {
+          this.visibleModal = ''
+        }
+      },
+      beforeDestroy() {
+        this.$bus.off('modal-close', this.closeModal)
+      }
     }
 </script>
