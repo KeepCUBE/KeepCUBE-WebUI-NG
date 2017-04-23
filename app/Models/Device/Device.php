@@ -14,6 +14,10 @@ class Device extends Model
     protected $fillable = [
         'name', 'type_id', 'room_id'
     ];
+    protected $casts = [
+        'room_id' => 'integer',
+        'type_id' => 'integer'
+    ];
     public function type() {
         return $this->belongsTo(Type::class);
     }
