@@ -1,7 +1,7 @@
 <template>
     <modal :title="device.name">
 
-        <components :deviceId="deviceId" :is="typeOperations"></components>
+        <components v-if="operations" :deviceId="deviceId" :is="typeOperations"></components>
 
     </modal>
 </template>
@@ -16,7 +16,8 @@
     props: ['deviceId'],
     data() {
       return {
-        types: [Switch, LED]
+        types: [Switch, LED],
+        operations: true
       }
     },
     components: {
@@ -24,10 +25,19 @@
     },
     computed: {
       device() {
-        return this.$store.getters.device(this.deviceId)
+        if(this.deviceId) {
+          return this.$store.getters.device(this.deviceId)
+        } else {
+          this.$bus.emit('modal-close')
+          return {name: '', type_id: 0};
+        }
       },
       typeOperations() {
-        return this.types[this.device.type_id - 1]
+        if(this.device.type_id > 0) {
+            return this.types[this.device.type_id - 1]
+        } else {
+          this.operations = false
+        }
       }
     },
     methods: {

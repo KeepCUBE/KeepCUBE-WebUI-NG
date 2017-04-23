@@ -28,7 +28,7 @@
   h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     padding: 0;
-    color: unquote("rgb(#{$palette-cube-blue-2})");
+    color: unquote("rgb(#{$palette-cube-blue-1})");
   }
 
   /**
@@ -37,7 +37,7 @@
 
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
     @include typo-display-3($colorContrast: true);
-    //color: $palette-cube-blue-2;
+    //color: $palette-cube-blue-1;
     font-size: 0.6em;
   }
 

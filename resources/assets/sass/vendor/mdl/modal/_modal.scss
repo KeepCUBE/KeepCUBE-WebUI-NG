@@ -31,7 +31,7 @@
 
       .material-icons {
         font-size: 3.8rem;
-        background-color: unquote("rgb(#{$palette-cube-blue-2})");
+        background-color: unquote("rgb(#{$palette-cube-blue-1})");
         color: white;
         padding:3px;
       }
@@ -43,7 +43,7 @@
     }
 
     .desc {
-      color: unquote("rgb(#{$palette-cube-blue-2})");
+      color: unquote("rgb(#{$palette-cube-blue-1})");
       font-size:1.4rem;
     }
   }

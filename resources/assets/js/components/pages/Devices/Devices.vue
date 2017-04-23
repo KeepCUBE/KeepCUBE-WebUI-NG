@@ -127,6 +127,13 @@
             this.$store.dispatch('removeDevice', deviceId )
           },
         },
+        watch: {
+          devices(val) {
+            if (this.openedDeviceId && val[this.openedDeviceId] == undefined) {
+              this.openedDeviceId = null
+            }
+          }
+        },
         components: {
           ModeButton,
           DeviceModal,
