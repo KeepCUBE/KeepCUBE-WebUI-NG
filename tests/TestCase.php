@@ -1,5 +1,4 @@
 <?php
-use JWTAuth;
 use KC\Models\User\User;
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
