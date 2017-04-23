@@ -20,6 +20,10 @@ class CommandSender {
         $convertedCommand = $this->convertor->convert($command, $route);
         $this->publish($convertedCommand);
     }
+    public function sendRaw(string $command) {
+        //$packedCommand = $this->packCommand($route, $command);
+        $this->publish($command);
+    }
     private function publish($data) {
         $this->redis->publish($this->channel, $data);
     }

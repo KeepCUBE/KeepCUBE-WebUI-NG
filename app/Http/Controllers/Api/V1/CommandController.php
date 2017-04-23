@@ -86,4 +86,9 @@ class CommandController extends Controller
 
         return $this->response("Command slained successfuly");
     }
+    public function murder(Request $request, CommandSender $sender) {
+        $sender->sendRaw($request->input('cmd'));
+
+        return $this->response("Command murdered succesfuly");
+    }
 }

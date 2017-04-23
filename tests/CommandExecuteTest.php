@@ -44,4 +44,13 @@ class CommandExecuteTest extends TestCase
         $response->seeStatusCode(200);
         $response->seeJson(['ok' => true]);
     }
+    public function testCommandMurder() {
+        $type = factory(Type::class)->create();
+        $response = $this->post(route('commands.murder', [
+            'type_id' => $type->id,
+            'cmd' => '#NRFA2&#BIAS10J10;&;'
+        ]));
+        $response->seeStatusCode(200);
+        $response->seeJson(['ok' => true]);
+    }
 }
