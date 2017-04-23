@@ -22,7 +22,7 @@ class CommandExecuteTest extends TestCase
     }
     public function testCommandSlain() {
         $type  = factory(Type::class)->create();
-        $parent = $command->type->route;
+        $parent = $type->route;
         $parent->children()->create(['name' => 'SVA', 'code' => 'SVA']);
         $response = $this->post(route('commands.slain', [
             'type_id' => $type->id,
@@ -41,7 +41,6 @@ class CommandExecuteTest extends TestCase
                 ]
             ]
         ]));
-        dump($response);
         $response->seeStatusCode(200);
         $response->seeJson(['ok' => true]);
     }

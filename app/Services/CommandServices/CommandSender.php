@@ -7,7 +7,7 @@ use KC\Models\Command\Command;
 use KC\Models\Route\Route;
 
 class CommandSender {
-    private $channel = 'command.stack';
+    private $channel = 'keep';
     private $redis;
     private $convertor;
 
