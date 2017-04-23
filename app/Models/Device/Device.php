@@ -8,6 +8,7 @@ use KC\Models\Command\Command;
 use KC\Models\Group\Group;
 use Illuminate\Database\Eloquent\Model;
 use KC\Models\Room\Room;
+use KC\Models\Switcher\Switcher;
 
 class Device extends Model
 {
@@ -29,5 +30,8 @@ class Device extends Model
     }
     public function room() {
         return $this->belongsTo(Room::class);
+    }
+    public function switches() {
+        return $this->hasMany(Switcher::class);
     }
 }

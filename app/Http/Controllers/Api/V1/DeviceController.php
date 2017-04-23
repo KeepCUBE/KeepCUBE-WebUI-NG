@@ -6,6 +6,7 @@ use KC\Http\Requests\DeviceRequests\DeviceRequest;
 use KC\Models\Device\Device;
 use Illuminate\Http\Request;
 use KC\Services\DeviceServices\DeviceFetcher;
+use KC\Services\DeviceServices\DeviceCreator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use KC\Http\Controllers\Api\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -28,9 +29,9 @@ class DeviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DeviceRequest $request)
+    public function store(DeviceRequest $request, DeviceCreator $creator)
     {
-        $device = Device::create($request->all());
+        $device = $creator->store($request->all());
 
         return $this->response("Device {$device->name} created", $device->toArray());
     }

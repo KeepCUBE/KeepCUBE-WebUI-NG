@@ -70,6 +70,7 @@ class DeviceResourceTest extends TestCase
         $response->seeStatusCode(200);
         $response->seeJson(['ok' => true]);
         $response->seeJson($device->toArray());
+        $this->seeInDatabase('switches', ['function'=>'on']);
     }
     public function testDeviceDestroy() {
         $device = factory(Device::class)->create();
