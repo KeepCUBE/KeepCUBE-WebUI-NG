@@ -54,7 +54,6 @@
       select(e){
         const val = Number(e.target.dataset.id)
         this.$store.dispatch('newDeviceSetAttr', {attr: 'type_id', val})
-        console.log(val)
         this.nextStep()
       }
     }

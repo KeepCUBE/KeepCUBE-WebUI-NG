@@ -14,7 +14,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in rooms">
+                    <tr v-for="(item, index) in rooms">
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <button @click="remove(index)" class="mdl-button mdl-js-button ">
+                                Remove
+                            </button>
+                        </td>
                         <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
                         <td></td>
                     </tr>
@@ -63,6 +68,9 @@
         },
         closeModal() {
           this.visibleModal = ''
+        },
+        remove(id) {
+          this.$store.dispatch('removeRoom', id)
         }
       },
       beforeDestroy() {

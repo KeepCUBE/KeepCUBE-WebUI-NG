@@ -37,6 +37,11 @@ const actions = {
         commit('ADD_ROOM', room)
       })
     }
+  },
+  removeRoom({ commit }, id) {
+    api.deleteRoom(id, id => {
+      commit('REMOVE_ROOM', id)
+    })
   }
 }
 
@@ -52,8 +57,8 @@ const mutations = {
     Vue.set(state.rooms, room.id, room)
     state.newRoomData = {name: ''}
   },
-  REMOVE_ROOM(state, key) {
-    Vue.delete(state.rooms, key)
+  REMOVE_ROOM(state, id) {
+    Vue.delete(state.rooms, id)
   },
   UPDATE_NEW_ROOM(state, information) {
     state.newRoomData = Object.assign(state.newRoomData, information)

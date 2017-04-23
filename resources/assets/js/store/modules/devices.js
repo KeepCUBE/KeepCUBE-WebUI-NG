@@ -4,7 +4,8 @@ const state = {
   devices: [],
   newDevice: {
     name: '',
-    type_id: null
+    type_id: null,
+    room_id: null,
   }
 }
 
@@ -21,7 +22,11 @@ const actions = {
     })
   },
   newDeviceSetAttr({ commit }, {attr, val}) {
-    commit('UPDATE_NEW_DEVICE', { [attr]: val})
+    if(attr in state.newDevice) {
+      commit('UPDATE_NEW_DEVICE', { [attr]: val})
+    } else {
+      console.log(`Atribute ${attr} is not allowed.`)
+    }
   },
   newDeviceSplash({ commit }) {
     if(state.newDevice.name && (state.newDevice.type_id || state.newDevice.type_id == 0)) {
@@ -30,9 +35,9 @@ const actions = {
       })
    }
   },
-  removeDevice({ commit }, key) {
-    api.deleteDevice(key, key => {
-      commit('REMOVE_DEVICE', key)
+  removeDevice({ commit }, id) {
+    api.deleteDevice(id, id => {
+      commit('REMOVE_DEVICE', id)
     })
   }
 }

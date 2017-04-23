@@ -14,3 +14,12 @@ export function createRoom (group, cb) {
     console.log(response)
   })
 }
+
+export function deleteRoom (id, cb) {
+  Vue.http.delete(`rooms/${id}`).then(response => {
+    cb(id)
+    console.log('room deleted')
+  }, response => {
+    console.log(response)
+  })
+}

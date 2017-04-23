@@ -81,18 +81,6 @@
             changeMode: function (mode) {
                 this.mode = mode
             },
-            findTypeById(id) {
-              //TODO: fucking delete this method and make it logical
-                let filteredType = this.types.filter((type) => {
-                  return type.id == id
-                });
-
-                if(filteredType && filteredType.length === 1) {
-                  return filteredType[0]
-                } else {
-                  return false
-                }
-            },
             findGroupsByIds(ids = []) {
 
                 let filteredGroups = []

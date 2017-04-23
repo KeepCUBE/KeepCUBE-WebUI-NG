@@ -19,6 +19,7 @@
 <script>
 
     export default{
+      props: ['nextStep'],
       data(){
         return{
 
@@ -26,7 +27,11 @@
       },
       methods: {
         select(e) {
-          console.log(e.target.dataset.id)
+          const val = Number(e.target.dataset.id)
+          this.$store.dispatch('newDeviceSetAttr', {attr: 'room_id', val})
+          if(this.$store.getters.newDeviceData.room_id == val) {
+            this.nextStep()
+          }
         }
       },
       computed: {
