@@ -18,6 +18,7 @@ class CreateDevicesTable extends Migration
             $table->string('name');
             $table->integer('type_id');
             $table->integer('room_id')->nullable();
+            $table->bigInteger('address')->nullable();
             $table->timestamps();
         });
     }

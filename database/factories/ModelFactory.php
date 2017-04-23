@@ -32,7 +32,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 
 $factory->define(Route::class, function (Faker\Generator $faker) {
     return [
-        'code' => strtoupper($faker->word),
+        'code' => 'NRF',
         'name' => $faker->name,
         'parent_id' => null
     ];

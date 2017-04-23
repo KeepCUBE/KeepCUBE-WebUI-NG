@@ -69,7 +69,7 @@ class DeviceResourceTest extends TestCase
         $response = $this->post(route('devices.store', $device->toArray()), [], $this->headers);
         $response->seeStatusCode(200);
         $response->seeJson(['ok' => true]);
-        $response->seeJson(['name' => $device->name]);
+        $response->seeJson($device->toArray());
     }
     public function testDeviceDestroy() {
         $device = factory(Device::class)->create();

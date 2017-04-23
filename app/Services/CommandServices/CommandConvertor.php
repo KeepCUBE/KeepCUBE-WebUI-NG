@@ -11,17 +11,23 @@ class CommandConvertor {
             $value = $this->formatValue($value);
             $code .= strtoupper($key).$value;
         }
-        return $this->packCommand($route, $command->command_scheme['name'].$code);
+        return $this->packCommand($route, '#'.$command->command_scheme['name'].$code.';');
     }
     public function packCommand(Route $route, $code) {
-        $header = '';
         foreach($route->getDescendantsAndSelf() as $child) {
-            $header .= strtoupper("#{$child->code}");
+            $code = addcslashes($code, '&\\');
+            if(strtoupper($child->code) === 'NRF') {
+                $code = "#NRFA1D&". $code . "&;";
+                continue;
+            }
+            $code = strtoupper("#{$child->code}D&"). $code . "&;";
         }
-        return "{$header}#{$code};";
+        return $code;
     }
     private function formatValue($value) {
         switch ($value) {
+            case is_numeric($value):
+                return (int)$value;
             case is_string($value):
                 return "&{$this->sanitizeString($value)}&";
             case is_array($value):

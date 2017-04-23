@@ -24,7 +24,7 @@ class DeviceFetcher {
             throw new NotFoundHttpException("Device with id {$id} not found");
         }
     }
-    public function paginate(array $query = null, $perPage = 15) {
+    public function paginate(string $includes = null, $perPage = 15) {
         $devices = $this->device->paginate($perPage);
 
         return $this->fractal
