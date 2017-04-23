@@ -3,7 +3,7 @@
         <div class="operation-bar">
             <label v-mdl class="mdl-icon-toggle mdl-js-icon-toggle" for="icon-toggle-1">
                 <input type="checkbox" id="icon-toggle-1" class="mdl-icon-toggle__input" v-model="editMode">
-                <ia class="mdl-icon-toggle__label material-icons">build</ia>
+                <i class="mdl-icon-toggle__label material-icons">build</i>
             </label>
         </div>
         <div class="mdl-grid">

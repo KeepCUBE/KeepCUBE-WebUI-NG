@@ -2,17 +2,18 @@
     <div id="operations">
         <div id="ledboard">
             <!--<div id="timeliner" v-timeliner ></div>-->
-            <input type="color" v-model="ledColor">
-            <div :style="{backgroundColor: ledColor}" class="led"></div>
+            <label for="ledColor" :style="{backgroundColor: ledColor}" class="mdl-colorpicker">
+                <input type="color" v-model="ledColor" id="ledColor">
+            </label>
+            <!--<div :style="{backgroundColor: ledColor}" class="led"></div>-->
         </div>
         <div id="power">
-            <button @click="on" class="mdl-button">On</button>
-            <button @click="off" class="mdl-button">Off</button>
+            <button @click="on" class="mdl-button power-button">On</button>
+            <button @click="off" class="mdl-button power-button">Off</button>
         </div>
     </div>
 </template>
 <style>
-
     #operations {
         display:flex;
         flex-direction: column;
