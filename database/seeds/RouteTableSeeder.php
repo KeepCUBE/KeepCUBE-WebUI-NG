@@ -13,8 +13,8 @@ class RouteTableSeeder extends Seeder
      */
     public function run()
     {
-        $parent = Route::create(['name' => 'Arduino nrf', 'code' => 'NRF']);
-        $child = $parent->children()->create(['name' => '433SPZ', 'code' => 'FOO']);
-        $child->children()->create(['name' => 'last deph', 'code' => 'LAST']);
+        //TODO: reverse logic | NRF should be child of ATMega and the result should be #ATM#NRF
+        $atmega = Route::create(['name' => 'NRF', 'code' => 'NRF']);
+        $atmega->children()->create(['name' => 'ATMega', 'code' => 'SVA']);
     }
 }
