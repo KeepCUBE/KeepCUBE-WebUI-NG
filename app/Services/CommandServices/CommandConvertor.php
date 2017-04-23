@@ -11,7 +11,7 @@ class CommandConvertor {
             $value = $this->formatValue($value);
             $code .= strtoupper($key).$value;
         }
-        return $this->packCommand($route, $command->command_scheme['name'].$code.';');
+        return $this->packCommand($route, '#'.$command->command_scheme['name'].$code.';');
     }
     public function packCommand(Route $route, $code) {
         foreach($route->getDescendantsAndSelf() as $child) {
