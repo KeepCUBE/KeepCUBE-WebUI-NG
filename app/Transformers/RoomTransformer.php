@@ -7,6 +7,9 @@ use KC\Models\Room\Room;
 
 class RoomTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'devices'
+    ];
     /**
      * A Fractal transformer.
      *
@@ -19,5 +22,10 @@ class RoomTransformer extends TransformerAbstract
             'name' => $room->name,
             'description' => $room->description
         ];
+    }
+    public function includeDevices(Room $room) {
+        $devices = $room->devices;
+
+        return $this->collection($devices, new DeviceTransformer, false);
     }
 }

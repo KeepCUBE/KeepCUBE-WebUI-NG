@@ -15,9 +15,9 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RoomFetcher $fetcher)
+    public function index(RoomFetcher $fetcher, Request $request)
     {
-        return $fetcher->paginate();
+        return $fetcher->paginate($request->input('includes'));
     }
 
     /**
@@ -39,9 +39,9 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(RoomFetcher $fetcher, $id)
+    public function show(RoomFetcher $fetcher, Request $request, $id)
     {
-        return $fetcher->find($id);
+        return $fetcher->find($id, $request->input('includes'));
     }
 
     /**

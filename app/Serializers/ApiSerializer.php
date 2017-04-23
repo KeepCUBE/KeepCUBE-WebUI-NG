@@ -14,10 +14,16 @@ class ApiSerializer extends ArraySerializer {
     }
     public function collection($resourceKey, array $data)
     {
+        if($resourceKey === false) {
+            return $data;
+        }
         return array_merge($this->null(),[$resourceKey ?: 'data' => $data]);
     }
     public function item($resourceKey, array $data)
     {
+        if($resourceKey === false) {
+            return $data;
+        }
         return array_merge($this->null(),$data);
     }
 }
