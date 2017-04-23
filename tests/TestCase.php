@@ -1,5 +1,6 @@
 <?php
-
+use JWTAuth;
+use KC\Models\User\User;
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -21,5 +22,15 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+    public function headers($user = null) {
+        if(!is_null($user)) {
+            $user = factory(User::class)->create();
+        }
+        $token = JWTAuth::fromUser($user);
+        JWTAuth::setToken($token);
+        return array_merge($this->headers, [
+            'Authorization' => 'Bearer '.$token
+        ]);
     }
 }
