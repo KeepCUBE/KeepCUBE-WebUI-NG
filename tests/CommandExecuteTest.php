@@ -16,12 +16,14 @@ class CommandExecuteTest extends TestCase
     public function testCommandExecute() {
         $command = factory(Command::class)->create();
         $parent = $command->type->route;
-        $parent->children()->create(['name' => 'NRF', 'code' => 'NRF']);
+        $parent->children()->create(['name' => 'SVA', 'code' => 'SVA']);
         $response = $this->post(route('commands.execute', [$command->id]));
         $response->seeStatusCode(200);
     }
     public function testCommandSlain() {
         $type  = factory(Type::class)->create();
+        $parent = $command->type->route;
+        $parent->children()->create(['name' => 'SVA', 'code' => 'SVA']);
         $response = $this->post(route('commands.slain', [
             'type_id' => $type->id,
             'command_scheme' => [
@@ -34,10 +36,12 @@ class CommandExecuteTest extends TestCase
                     ],
                     'T' => [
                         1000
-                    ]
+                    ],
+                    'A' => 1
                 ]
             ]
         ]));
+        dump($response);
         $response->seeStatusCode(200);
         $response->seeJson(['ok' => true]);
     }
