@@ -42,6 +42,17 @@
   line-height: $button-height;
   vertical-align: middle;
 
+  &.power-button {
+    width: 2.3em;
+    height:1.8em;
+    margin: 0 0.2em;
+    padding: 0.2em;
+    font-size: 4em;
+    color: white;
+    background-color: unquote("rgb(#{$palette-cube-blue-1})");
+    font-weight: 200;
+  }
+
   &::-moz-focus-inner {
     border: 0;
   }

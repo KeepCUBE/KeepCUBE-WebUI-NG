@@ -1,8 +1,8 @@
 <template>
     <div id="operations">
         <div id="power" v-show="!sync">
-            <button @click="on" id="on" class="mdl-button">On</button>
-            <button @click="off" id="off" class="mdl-button">Off</button>
+            <button @click="on" id="on" class="mdl-button power-button">On</button>
+            <button @click="off" id="off" class="mdl-button power-button">Off</button>
         </div>
         <hr>
         <div id="sync">

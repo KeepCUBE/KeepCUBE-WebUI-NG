@@ -1,7 +1,10 @@
 <template>
     <div class="mdl-cell mdl-cell--4-col mdl-card">
         <div class="mdl-card__title">{{ card.title }}</div>
-        <div class="power">ON/OFF</div>
+        <div>
+            <button class="mdl-button card-button">On</button>
+            <button class="mdl-button card-button">Off</button>
+        </div>
     </div>
 </template>
 <style>
@@ -32,6 +35,13 @@
     }
     .mdl-card__title {
         font-size: 1.5em;
+    }
+    .card-button {
+        width: 3em;
+        height:2em;
+        color: white;
+        font-size: 2em;
+        font-weight:200;
     }
 </style>
 <script>
