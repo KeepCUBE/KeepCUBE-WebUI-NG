@@ -1,17 +1,24 @@
 /**
  * Created by ddos on 19.04.17.
  */
-export function sendLedConf (configuration) {
+export function sendLedConf (...configuration) {
 
   const values = {
     L: 1,
     C: [
-      configuration.color
     ],
     T: [
-      1000
     ]
   }
+
+  configuration.forEach(function (conf) {
+    values.C.push(conf.color)
+    if (conf.time){
+      values.T.push(conf.time)
+    } else {
+      values.T.push(1000)
+    }
+  })
 
   configuration = JSON.stringify(
     {

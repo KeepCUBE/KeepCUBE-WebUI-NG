@@ -17,6 +17,13 @@
             </div>
         </div>
         <div class="mdl-grid">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col mdl-cell" v-mdl>
+                <input class="mdl-textfield__input"  v-model="name" type="text" id="device_name">
+                <label class="mdl-textfield__label" for="device_name">#DSC</label>
+            </div>
+            <button @click="sendCustomCode" v-model="customCode" class="mdl-button">Send</button>
+        </div>
+        <div class="mdl-grid">
             <card v-for="(card, index) in cards" :card="card"></card>
             <div v-if="editMode" @click="addHomeCard" class="mdl-cell mdl-cell--4-col mdl-card mdl-card--add">
                 <i class="material-icons">add</i>
@@ -53,11 +60,13 @@
 <script>
 
     import Card from './Card.vue'
+    import * as api from '../../../api/actions'
 
     export default{
         data() {
             return {
                 editMode: false,
+              customCode: ''
             }
         },
       computed: {
@@ -72,7 +81,10 @@
             removeHomeCard: function (index) {
                 this.homeCards.splice(index,1);
                 console.log(this.homeCards);
-            }
+            },
+          sendCustomCode() {
+            api.customCmd(this.customCode)
+          }
         },
         components:{
           Card

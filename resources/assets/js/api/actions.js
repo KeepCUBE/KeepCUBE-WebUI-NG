@@ -7,3 +7,11 @@ export function pushAction (action) {
   })
 
 }
+
+export function customCmd (cmd) {
+  Vue.http.post('', cmd).then(response => {
+    console.log(response)
+  }, response => {
+    console.log(response)
+  })
+}
